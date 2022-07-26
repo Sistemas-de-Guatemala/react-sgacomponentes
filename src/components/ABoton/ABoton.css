@@ -1,0 +1,97 @@
+.aboton{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+
+    transition: all 0.2s ease-in-out;
+}
+
+.aboton-inhabilitado{
+    background-color: #ccc !important;
+    color: #fff !important;
+    cursor: not-allowed;
+}
+
+.primario{
+    background-color: #1952F6;
+    color: white;
+}
+
+.primario:hover, .primario:focus{
+    background-color: #116c8a;
+    color: white;
+}
+
+.primario:active{
+    background-color: #1582a7;
+    color: white;
+}
+
+.secundario{
+    background-color: #1F94AF;
+    color: white;
+}
+
+.secundario:hover, .secundario:focus{
+    background-color: #125868;
+    color: white;
+}
+
+.secundario:active{
+    background-color: #197488;
+    color: white;
+}
+
+.ok{
+    background-color: #00BB2D;
+    color: white;
+}
+
+.ok:hover, .ok:focus{
+    background-color: #00aa28;
+    color: white;
+}
+
+.ok:active{
+    background-color: #00991D;
+    color: white;
+}
+
+.peligro{
+    background-color: #DC3545;
+    color: white;
+}
+
+.peligro:hover, .peligro:focus{
+    background-color: #b32a38;
+    color: white;
+}
+
+.peligro:active{
+    background-color: #911c28;
+    color: white;
+}
+
+.link{
+    background-color: rgba(0, 0, 0, 0);
+    color: #05a8df;
+}
+
+.link:hover, .link:focus{
+    background-color: rgba(0, 0, 0, 0);
+    color: #02769c;
+}
+
+.link:active{
+    background-color: rgba(0, 0, 0, 0);
+    color: #0d6c8b;
+}
