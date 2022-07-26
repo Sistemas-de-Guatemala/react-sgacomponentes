@@ -28,13 +28,10 @@ Está librería es un proyecto que tiene como objetivo crear una librería de co
   <ABoton>Hola</ABoton>
   ```
 
-## Dependencias externas
+## Dependencias Desarrollo
 
 | Dependencia                                                                               | Motivo                                                                                |
 | -- | -- |
 | [uuid](https://www.npmjs.com/package/uuid)                                                | Se usa para controlar los ids de los componentes                                      |
-
-## Dependencias de desarrollo
-| Dependencia                                                                               | Motivo                                                                                |
-| -- | -- |
 | [@types/uuid](https://www.npmjs.com/package/@types/uuid)                                  | Se usa para que uuid reconozca sus tipos en typescript                                |
+| [postcss](https://www.npmjs.com/package/postcss)                                          | Se usa para que postcss reconozca css en typescript                                   |
