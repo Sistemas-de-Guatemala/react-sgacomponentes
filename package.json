@@ -1,7 +1,8 @@
 {
   "name": "react-sgacomponentes",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/react-sgacomponentes"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Allam05/react-sgacomponentes.git"
   },
   "bugs": {
     "url": "https://github.com/Allam05/react-sgacomponentes/issues"
