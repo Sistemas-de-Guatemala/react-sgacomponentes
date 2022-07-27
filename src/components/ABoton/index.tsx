@@ -1,6 +1,5 @@
-import React, { useState, useRef, useEffect, useImperativeHandle } from "react";
+import React from "react";
 import './ABoton.css';
-
 import AControl from './../AUtileriaComponentes/AControl';
 
 export interface ABotonProps {
@@ -40,23 +39,23 @@ const ABoton = React.forwardRef<ABotonRef, ABotonProps>(
         props,
         ref
     ) {
-        const [ visible, fijarVisible ] = useState(true);
-        const refABoton = useRef<HTMLButtonElement>(null);
-        const [ uuid, _ ] = useState<string>(AControl.GenerarUuidControl());
+        const [ visible, fijarVisible ] = React.useState<boolean>(true);
+        const refABoton = React.useRef<HTMLButtonElement>(null);
+        const [ uuid, _ ] = React.useState<string>(AControl.GenerarUuidControl());
 
-        useEffect(() => {
+        React.useEffect(() => {
             if(props.hasOwnProperty('visible')) {
                 fijarVisible(props.visible || true);
             }
         }, []);
 
-        useEffect(() => {
+        React.useEffect(() => {
             if(props.hasOwnProperty('visible')) {
                 fijarVisible(props.visible || true);
             }
         }, [props.visible]);
 
-        useImperativeHandle(ref, () => ({
+        React.useImperativeHandle(ref, () => ({
             Refuuid: () => uuid,
             TipoAControl: ():string => "ABoton",
             focus: ():void => refABoton.current?.focus(),

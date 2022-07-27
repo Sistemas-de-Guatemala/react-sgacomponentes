@@ -1,6 +1,5 @@
-import React, { forwardRef, useState, useRef, useImperativeHandle } from "react";
+import React from "react";
 import './ABotonOpciones.css';
-
 import AControl from './../AUtileriaComponentes/AControl';
 
 export interface ABotonOpcionesProps{
@@ -26,18 +25,18 @@ export interface ABotonOpcionesRef{
     foco: () => void;
 };
 
-const ABotonOpciones = forwardRef<ABotonOpcionesRef, ABotonOpcionesProps>(
+const ABotonOpciones = React.forwardRef<ABotonOpcionesRef, ABotonOpcionesProps>(
     function(
         props,
         ref
     ){
         let visible = props.visible || true;
 
-        const [ opcionesVisibles, fijarOpcionesVisibles ] = useState<boolean>(false);
-        const [ uuid, _ ] = useState<string>(AControl.GenerarUuidControl());
-        const refABotonOpciones = useRef<HTMLButtonElement>(null);
+        const [ opcionesVisibles, fijarOpcionesVisibles ] = React.useState<boolean>(false);
+        const [ uuid, _ ] = React.useState<string>(AControl.GenerarUuidControl());
+        const refABotonOpciones = React.useRef<HTMLButtonElement>(null);
 
-        useImperativeHandle(ref, () => ({
+        React.useImperativeHandle(ref, () => ({
             Refuuid: () => uuid,
             TipoAControl: () => 'ABotonOpciones',
             focus: () => refABotonOpciones.current?.focus(),

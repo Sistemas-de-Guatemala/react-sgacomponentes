@@ -2918,20 +2918,20 @@ var AControl = /** @class */ (function () {
 var aControl = new AControl();
 
 var ABoton = React.forwardRef(function ABotonInterno(props, ref) {
-    var _a = react.exports.useState(true), visible = _a[0], fijarVisible = _a[1];
-    var refABoton = react.exports.useRef(null);
-    var _b = react.exports.useState(aControl.GenerarUuidControl()), uuid = _b[0]; _b[1];
-    react.exports.useEffect(function () {
+    var _a = React.useState(true), visible = _a[0], fijarVisible = _a[1];
+    var refABoton = React.useRef(null);
+    var _b = React.useState(aControl.GenerarUuidControl()), uuid = _b[0]; _b[1];
+    React.useEffect(function () {
         if (props.hasOwnProperty('visible')) {
             fijarVisible(props.visible || true);
         }
     }, []);
-    react.exports.useEffect(function () {
+    React.useEffect(function () {
         if (props.hasOwnProperty('visible')) {
             fijarVisible(props.visible || true);
         }
     }, [props.visible]);
-    react.exports.useImperativeHandle(ref, function () { return ({
+    React.useImperativeHandle(ref, function () { return ({
         Refuuid: function () { return uuid; },
         TipoAControl: function () { return "ABoton"; },
         focus: function () { var _a; return (_a = refABoton.current) === null || _a === void 0 ? void 0 : _a.focus(); },
@@ -2945,12 +2945,12 @@ var ABoton = React.forwardRef(function ABotonInterno(props, ref) {
 var css_248z = ".abotonopciones{\r\n    display: block;\r\n    color: #767676;\r\n    border: 1px solid #767676;\r\n    background-color: white;\r\n    border-radius: 5px;\r\n    cursor: pointer;\r\n    align-items: center;\r\n    justify-content: center;\r\n    transition: all 0.2s ease-in-out;\r\n}\r\n\r\n.abotonopciones:hover{\r\n    background-color: #767676;\r\n    color: white;\r\n    transition: all 0.2s ease-in-out;\r\n}\r\n\r\n.abotonopciones:focus{\r\n    border: 1px solid #0C67BC;\r\n    outline: none;\r\n    transition: all 0.2s ease-in-out;\r\n}\r\n\r\n.abotonopciones:active{\r\n    background-color: #0C67BC;\r\n    color: white;\r\n    transition: all 0.2s ease-in-out;\r\n}\r\n\r\n/* Lista desplegable */\r\n.abotonopciones-opciones{\r\n    position: absolute;\r\n    z-index: 1000;\r\n    list-style: none;\r\n    margin: 0;\r\n    padding: 0;\r\n    max-width: fit-content;\r\n    border-radius: 5px;\r\n    background-color: white;\r\n    box-shadow: 0px 3px 14px 1px rgba(0,0,0,0.32);\r\n    -webkit-box-shadow: 0px 3px 14px 1px rgba(0,0,0,0.32);\r\n    -moz-box-shadow: 0px 3px 14px 1px rgba(0,0,0,0.32);\r\n}\r\n\r\n.abotonopciones-opciones li{\r\n    cursor: pointer;\r\n    display: block;\r\n    padding: 10px;\r\n    border-bottom: 1px solid rgba(0, 0, 0, 0.2);\r\n    transition: all 0.2s ease-in-out; \r\n}\r\n\r\n.abotonopciones-opciones li:hover{\r\n    background-color: #767676;\r\n    color: white;\r\n    transition: all 0.2s ease-in-out;\r\n}\r\n\r\n.abotones-opciones li:focus{\r\n    border: 1px solid #0C67BC;\r\n    outline: none;\r\n    transition: all 0.2s ease-in-out;\r\n}\r\n\r\n.abotones-opciones li:active{\r\n    background-color: #0C67BC;\r\n    color: white;\r\n    transition: all 0.2s ease-in-out;\r\n}\r\n";
 styleInject(css_248z);
 
-var ABotonOpciones = react.exports.forwardRef(function (props, ref) {
+var ABotonOpciones = React.forwardRef(function (props, ref) {
     var visible = props.visible || true;
-    var _a = react.exports.useState(false), opcionesVisibles = _a[0], fijarOpcionesVisibles = _a[1];
-    var _b = react.exports.useState(aControl.GenerarUuidControl()), uuid = _b[0]; _b[1];
-    var refABotonOpciones = react.exports.useRef(null);
-    react.exports.useImperativeHandle(ref, function () { return ({
+    var _a = React.useState(false), opcionesVisibles = _a[0], fijarOpcionesVisibles = _a[1];
+    var _b = React.useState(aControl.GenerarUuidControl()), uuid = _b[0]; _b[1];
+    var refABotonOpciones = React.useRef(null);
+    React.useImperativeHandle(ref, function () { return ({
         Refuuid: function () { return uuid; },
         TipoAControl: function () { return 'ABotonOpciones'; },
         focus: function () { var _a; return (_a = refABotonOpciones.current) === null || _a === void 0 ? void 0 : _a.focus(); },
