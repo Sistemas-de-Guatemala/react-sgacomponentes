@@ -1,6 +1,8 @@
 # react-sgacomponentes
 Está librería es un proyecto que tiene como objetivo crear una librería de componentes para el proyecto de sdg.
 
+> :warning: **Esta librería está en desarrollo**
+
 ## Instalación
   ### npm
   ```bash
