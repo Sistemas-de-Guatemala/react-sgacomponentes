@@ -10,7 +10,7 @@ export interface ABotonProps {
     /** Si es false el aboton se oculta */
     visible?: boolean;
     /** Estilos del aboton */
-    estilos: React.CSSProperties;
+    estilos?: React.CSSProperties;
     /** clase CSS o SCSS del aboton */
     className?: string;
     /** si es submit hará postback */
