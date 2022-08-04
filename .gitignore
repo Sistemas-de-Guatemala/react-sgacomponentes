@@ -1,8 +1,0 @@
-#dist
-node_modules
-.vscode
-.vi
-.vim
-.idea
-.vs
-storybook-static
