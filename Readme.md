@@ -1,6 +1,8 @@
 # react-sdgacomponentes
 Librería de componentes basados en react para proyecto de SDG
 
+> :warning: **Este proyecto está en desarrollo por lo tanto no debe ser usado para algún proyecto**
+
 ## Comandos de uso
   Este comando empaqueta el proyecto
   ```bash
