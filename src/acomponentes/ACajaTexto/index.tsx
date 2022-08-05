@@ -26,7 +26,7 @@ interface IPropsACajaTexto {
     /** Si es true, mostrará un mensaje de alerta en la pantalla */
     requerido?: boolean;
     /** Recibe una expresión regular que se validará en el ACajaTexto indicando que no es válido */
-    expRegular?: string;
+    expRegular?: RegExp;
     /** Clase CSS del contenedor */
     className?: string;
     /** Clase CSS del Titulo */
@@ -138,6 +138,19 @@ const ACajaTexto = React.forwardRef<IRefACajaTexto, IPropsACajaTexto>(
 
         const cambioTexto = (e: React.ChangeEvent<HTMLInputElement>) => {
             e.preventDefault();
+
+            if(props.cambioTexto) {
+                props.cambioTexto(e.target.value);
+            }
+
+            if(props.expRegular) {
+                if(props.expRegular.test(e.target.value)) {
+                    fijarLbdError("");
+                }
+                else{
+                    fijarLbdError("El texto tiene caracteres no válidos");
+                }
+            }
         }
 
         const QuitoFoco = (e: React.FocusEvent<HTMLInputElement, Element>) => {
@@ -195,7 +208,7 @@ const ACajaTexto = React.forwardRef<IRefACajaTexto, IPropsACajaTexto>(
                             tabIndex={props.tabIndice}
                             disabled={!(props.habilitado || true)}
                             onBlur={QuitoFoco}
-                            pattern={props.expRegular}
+                            pattern={props.expRegular?.toString()}
                             placeholder={props.placehodler}
                         />
                         <Icono />

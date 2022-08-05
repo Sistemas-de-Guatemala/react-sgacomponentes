@@ -1,3 +1,5 @@
 import ABoton from './ABoton';
 import ABotonOpciones from './ABotonOpciones';
-export { ABoton, ABotonOpciones };
+import AEtiqueta from './AEtiqueta';
+import ACajaTexto from './ACajaTexto';
+export { ABoton, ABotonOpciones, AEtiqueta, ACajaTexto };
