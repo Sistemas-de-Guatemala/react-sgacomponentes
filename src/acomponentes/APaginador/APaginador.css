@@ -1,0 +1,45 @@
+.apaginador{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: fit-content;
+}
+
+.apaginador-contenedor{
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    justify-content: space-between;
+    width: 780px;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    color: #05a8df;
+}
+
+.apaginador-paginas-seleccionada{
+    background-color: #05a8df;
+    color: white;
+}
+
+.apaginador-pagina{
+    list-style: none;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.apaginador-pagina-link{
+    display: block;
+    text-decoration: none;
+    padding: 5px;
+}
+
+.apaginador-pagina:hover,
+.apaginador-pagina:focus,
+.apaginador-pagina:active{
+    background-color: #05a8df;
+    color: white;
+    transition: all 0.2s ease-in-out;
+}

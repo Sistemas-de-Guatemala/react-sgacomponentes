@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useImperativeHandle } from "react";
 import './AEtiqueta.css';
 
-interface IPropsAEtiqueta{
+export interface IPropsAEtiqueta{
     /** Texto a mostrar en pantalla */
     children: React.ReactNode;
     /** Si es falso el AEtiqueta se oculta */
@@ -18,7 +18,8 @@ interface IPropsAEtiqueta{
     estilos?: React.CSSProperties;
 };
 
-interface IRefAEtiqueta{
+export interface IRefAEtiqueta{
+    TipoAControl: () => string;
 };
 
 const AEtiqueta = React.forwardRef<IRefAEtiqueta, IPropsAEtiqueta>(
@@ -28,6 +29,10 @@ const AEtiqueta = React.forwardRef<IRefAEtiqueta, IPropsAEtiqueta>(
     ){
 
         const visible = props.visible || true;
+
+        useImperativeHandle(ref, () => ({
+            TipoAControl: () => "AEtiqueta"
+        }));
 
         return(
             <label

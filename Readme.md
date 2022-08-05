@@ -57,3 +57,5 @@ const App = () => (
 | [postcss](https://www.npmjs.com/package/postcss)                                                      | PostCSS                                                                                   |
 | [uuid](https://www.npmjs.com/package/uuid)                                                            | Crea un hash para los acomponentes                                                        |
 | [@types/uuid](https://www.npmjs.com/package/@types/uuid)                                              | @types/uuid -> Tipos de uuid                                                              |
+| [react-paginator](https://www.npmjs.com/package/react-paginator)                                      | React-paginator -> Paginador                                                              |
+| [react-icons](https://www.npmjs.com/package/react-icons)                                              | Iconos                                                                                    |
