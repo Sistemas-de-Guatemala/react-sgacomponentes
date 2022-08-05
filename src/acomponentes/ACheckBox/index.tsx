@@ -2,7 +2,7 @@ import React, { useRef, useMemo, useImperativeHandle } from "react";
 import './ACheckBox.css';
 import AControl from './../AUtileriaComponentes/AControl';
 
-interface IPropsACheckBox {
+export interface IPropsACheckBox {
     /** Indica si el componente está visible o no */
     visible?: boolean;
     /** Clase CSS */
@@ -25,7 +25,7 @@ interface IPropsACheckBox {
     quitoFocus?: (evento: React.FocusEvent<HTMLInputElement, Element>) => void;
 }
 
-interface IRefACheckBox {
+export interface IRefACheckBox {
     /** Obtiene el tipo ATipoControl */
     TipoAControl: () => string;
     /** Obtiene el uuid del AControl */

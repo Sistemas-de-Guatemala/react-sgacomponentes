@@ -4,7 +4,7 @@ import AControl from './../AUtileriaComponentes/AControl';
 
 import AEtiqueta from './../AEtiqueta';
 
-interface IPropsACajaTexto {
+export interface IPropsACajaTexto {
     /** Si es falso el ACajaTexto se oculta */
     visible?: boolean;
     /** Texto que se muestra en el ACajaTexto */
@@ -61,7 +61,7 @@ interface IPropsACajaTexto {
     placehodler?: string;
 }
 
-interface IRefACajaTexto {
+export interface IRefACajaTexto {
     /** Retorna que tipo de AControl es */
     TipoAControl: () => string;
     /** Devuelve el ID del ACajaTexto */
