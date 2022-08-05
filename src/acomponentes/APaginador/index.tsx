@@ -33,7 +33,7 @@ export interface IRefAPaginador{
 }
 
 const APaginador = React.forwardRef<IRefAPaginador, IPropsAPaginador>(
-    function (
+    function APaginadorInterno (
         props,
         ref
     ) {

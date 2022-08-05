@@ -23,7 +23,7 @@ export interface IRefAEtiqueta{
 };
 
 const AEtiqueta = React.forwardRef<IRefAEtiqueta, IPropsAEtiqueta>(
-    function(
+    function AEtiquetaInterno(
         props,
         ref
     ){

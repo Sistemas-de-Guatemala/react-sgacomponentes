@@ -1,0 +1,30 @@
+.aradiobotones{
+    border: 0;
+}
+
+.aradiobotones-radios > label{
+    color: #979595;
+}
+
+.aradiobotones-radios > label > input[type="radio"]{
+    margin-right: 5px;
+    border: 2px solid white;
+    color: #979595;
+    height: 1.2em;
+    width: 1.2em;
+    background-color: red;
+}
+
+.aradiobotones-radios > label > input[type="radio"]:checked:after{
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        top: -2px;
+        left: -1px;
+        position: relative;
+        background-color: #0C67BC;
+        content: '';
+        display: inline-block;
+        visibility: visible;
+        border: 2px solid white; 
+}

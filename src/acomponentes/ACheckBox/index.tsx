@@ -37,7 +37,7 @@ export interface IRefACheckBox {
 }
 
 const ACheckBox = React.forwardRef<IRefACheckBox, IPropsACheckBox>(
-    function (
+    function ACheckBoxInterno (
         props,
         ref
     ) {

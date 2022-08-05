@@ -75,7 +75,7 @@ export interface IRefACajaTexto {
 }
 
 const ACajaTexto = React.forwardRef<IRefACajaTexto, IPropsACajaTexto>(
-    function (
+    function ACajaTextoInterno (
         props,
         ref
     ) {
