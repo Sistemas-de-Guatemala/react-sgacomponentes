@@ -6,6 +6,7 @@
   "module": "lib/index.esm.js",
   "types": "lib/index.d.ts",
   "repository": "https://github.com/Allam05/react-sgacomponentes.git",
+  "homepage": "https://allam05.github.io/react-sgacomponentes/",
   "author": "Allam López <xyzalan3030@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
