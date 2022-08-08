@@ -18,12 +18,12 @@
     "@rollup/plugin-commonjs": "^22.0.1",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@storybook/addon-actions": "^6.5.10",
-    "@storybook/addon-essentials": "^6.5.10",
+    "@storybook/addon-essentials": "^6.4.22",
     "@storybook/addon-interactions": "^6.5.10",
     "@storybook/addon-links": "^6.5.10",
     "@storybook/builder-webpack4": "^6.5.10",
     "@storybook/manager-webpack4": "^6.5.10",
-    "@storybook/react": "^6.5.10",
+    "@storybook/react": "^6.1.21",
     "@storybook/testing-library": "^0.0.13",
     "@types/file-saver": "^2.0.5",
     "@types/react": "^18.0.15",
@@ -44,7 +44,6 @@
     "uuid": "^8.3.2",
     "xlsx": "^0.18.5"
   },
-  "dependencies": {},
   "scripts": {
     "compilar-prod": "rollup -c",
     "storybook": "start-storybook -p 6006",
