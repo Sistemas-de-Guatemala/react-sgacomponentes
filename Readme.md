@@ -40,6 +40,27 @@ const App = () => (
 );
 ```
 
+## Lista de componentes actualmente
+| Componente                                                  | Descripción                                                             |
+| -- | -- |
+| ABoton                                                      | Componente de botón                                                     |
+| ABotonOpciones                                              | Componente de botón con opciones                                        |
+| AEtiqueta                                                   | Componente de etiqueta                                                  |
+| ACajaTexto                                                  | Componente de caja de texto                                             |
+| ACheckBox                                                   | Componente de checkbox                                                  |
+| APaginador                                                  | Componente de paginador                                                 |
+| APanel                                                      | Componente que levanta un modal                                         |
+| ARadioBotones                                               | Componente de radio botones                                             |
+| ATitulosPantallas                                           | Componente de titulos de pantallas                                      |
+| ATablaDinamica                                              | Componente de tabla dinamica                                            |
+
+## Lista de utilidades actualmente
+
+ - GenerarExcelJSON: Genera un archivo excel con una estructura JSON
+ - ArrayExcelAArrayObjetos: Convierte un array de excel a un array de objetos
+ - TransformarATablaDinamicaAExcel : Convierte una tabla dinamica a una tabla excel
+ - ImprimirObjetoHTML: Imprime un objeto en formato HTML
+
 ## Paquetes para desarrollo de la librería
 
 | Paquete                                                                                               | Descripción                                                                               |
@@ -59,3 +80,7 @@ const App = () => (
 | [@types/uuid](https://www.npmjs.com/package/@types/uuid)                                              | @types/uuid -> Tipos de uuid                                                              |
 | [react-paginator](https://www.npmjs.com/package/react-paginator)                                      | React-paginator -> Paginador                                                              |
 | [react-icons](https://www.npmjs.com/package/react-icons)                                              | Iconos                                                                                    |
+| [xlsx](https://www.npmjs.com/package/xlsx)                                                            | Librería para la lectura de archivos excel                                                |
+| [file-saver](https://www.npmjs.com/package/file-saver)                                                | Librería para la exportación de archivos                                                  |
+| [@types/file-saver](https://www.npmjs.com/package/@types/file-saver)                                  | @types/file-saver -> Tipos de file-saver                                                  |
+| [react-children-utilities](https://www.npmjs.com/package/react-children-utilities)                    | React-children-utilities -> Utilidades para los hijos de react                            |

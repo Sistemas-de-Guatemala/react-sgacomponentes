@@ -58,7 +58,7 @@ export interface IPropsACajaTexto {
     /** Evento que se ejecuta cuando el cursor se va del ACajaTexto */
     quitoFocus?: () => void;
     /** Texto que se muestra cuando no hay texto sobre el ACajaTexto */
-    placehodler?: string;
+    placeholder?: string;
 }
 
 export interface IRefACajaTexto {
@@ -209,7 +209,7 @@ const ACajaTexto = React.forwardRef<IRefACajaTexto, IPropsACajaTexto>(
                             disabled={!(props.habilitado || true)}
                             onBlur={QuitoFoco}
                             pattern={props.expRegular?.toString()}
-                            placeholder={props.placehodler}
+                            placeholder={props.placeholder}
                         />
                         <Icono />
                     </div>

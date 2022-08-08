@@ -6,6 +6,15 @@ import ACheckBox from './ACheckBox';
 import APaginador from './APaginador';
 import APanel from './APanel';
 import ARadioBotones from './ARadioBotones';
+import ATitulosPantallas from './ATitulosPantallas';
+import ATablaDinamica from './ATablaDinamica';
+
+import {
+    GenerarExcelJSON,
+    ArrayExcelAArrayObjetos,
+    TransformarATablaDinamicaAExcel,
+    ImprimirObjetoHTML
+} from './AUtileriaComponentes/ASTD';
 
 export{
     ABoton,
@@ -15,5 +24,16 @@ export{
     ACheckBox,
     APaginador,
     APanel,
-    ARadioBotones
+    ARadioBotones,
+    ATitulosPantallas,
+    ATablaDinamica,
+
+    /** Generar Excel desde un JSON */
+    GenerarExcelJSON,
+    /** Transformar un array excel a un array de objetos */
+    ArrayExcelAArrayObjetos,
+    /** Transformar Datos de tabladinamica a excel */
+    TransformarATablaDinamicaAExcel,
+    /** Pasar objeto a una impresión HTML */
+    ImprimirObjetoHTML
 }
