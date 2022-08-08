@@ -21,7 +21,20 @@ export interface IARadioBotonesProps {
     direccion?: 'horizontal' | 'vertical';
     /** Items que se mostrarán en el contenedor del ARadioBoton */
     opciones: IARadioOpciones[];
-    /** Valor actual del ARadioBoton */
+    /**
+     * Valor actual del ARadioBoton
+     * @example
+     * <ARadioBotones
+     *  titulo={"Titulo del radio botón"}
+     *  opciones={[
+     *      { texto: "Opcion 1", valor: "1" },
+     *      { texto: "Opcion 2", valor: "2" },
+     *      { texto: "Opcion 3", valor: "3" },
+     *  ]}
+     *  valor={estadoValor}
+     *  cambioSeleccion={(valor) => { fijarEstadoValor(valor); }}
+     * />
+     */
     valor?: string | number;
     /** Evento que se ejecuta cuando dan click en un ARadioBoton */
     cambioSeleccion: (valor: string | number) => void;
@@ -46,9 +59,15 @@ const ARadioBotones = React.forwardRef<IRefARadioBotones, IARadioBotonesProps>(
             Refuuid: () => uuid
         }));
 
+        let visible = true;
+
+        if (props.visible !== undefined) {
+            visible = props.visible;
+        }
+
         return (
             <>{
-                (props.visible || true) &&
+                visible &&
                 <fieldset
                     className={"aradiobotones " + (props.className || '')}
                 >

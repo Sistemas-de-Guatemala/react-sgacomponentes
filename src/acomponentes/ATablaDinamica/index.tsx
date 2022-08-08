@@ -161,8 +161,8 @@ const ATablaDinamica = React.forwardRef<IATablaDinamicaRef, IATablaDinamicaProps
 
         let visible = true;
 
-        if (props.hasOwnProperty('visible')) {
-            visible = props.visible || true;
+        if (props.visible !== undefined) {
+            visible = props.visible;
         }
 
         const RenderizarTitulo = () => {

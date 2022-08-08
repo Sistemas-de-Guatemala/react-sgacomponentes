@@ -37,8 +37,12 @@ const APaginador = React.forwardRef<IRefAPaginador, IPropsAPaginador>(
         props,
         ref
     ) {
+        let visible = true;
 
-        const [visible, _] = useState<boolean>(props.visible || true);
+        if(props.visible !== undefined){
+            visible = props.visible;
+        }
+
         // We start with an empty list of items.
         const [currentItems, setCurrentItems] = useState<Array<any>>([]);
         const [pageCount, setPageCount] = useState(0);

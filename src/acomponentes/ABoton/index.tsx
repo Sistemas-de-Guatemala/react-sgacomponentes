@@ -39,21 +39,14 @@ const ABoton = React.forwardRef<ABotonRef, ABotonProps>(
         props,
         ref
     ) {
-        const [ visible, fijarVisible ] = React.useState<boolean>(true);
         const refABoton = React.useRef<HTMLButtonElement>(null);
         const [ uuid, _ ] = React.useState<string>(AControl.GenerarUuidControl());
 
-        React.useEffect(() => {
-            if(props.hasOwnProperty('visible')) {
-                fijarVisible(props.visible || true);
-            }
-        }, []);
+        let visible = true;
 
-        React.useEffect(() => {
-            if(props.hasOwnProperty('visible')) {
-                fijarVisible(props.visible || true);
-            }
-        }, [props.visible]);
+        if(props.visible !== undefined) {
+            visible = props.visible;
+        }
 
         React.useImperativeHandle(ref, () => ({
             Refuuid: () => uuid,

@@ -88,20 +88,34 @@ const ACajaTexto = React.forwardRef<IRefACajaTexto, IPropsACajaTexto>(
             Refuuid: () => uuid,
             FijarMsjError: (msj: string) => fijarLbdError(msj),
             focus: () => {
-                let habilitado = props.habilitado || true;
+                let habilitado = true;
+
+                if(props.habilitado !== undefined){
+                    habilitado = props.habilitado;
+                }
+
                 if (habilitado) {
                     txtRef.current?.focus();
                 }
             },
             foco: () => {
-                let habilitado = props.habilitado || true;
+                let habilitado = true;
+
+                if(props.habilitado !== undefined){
+                    habilitado = props.habilitado;
+                }
+
                 if (habilitado) {
                     txtRef.current?.focus();
                 }
             }
         }));
 
-        let visible: boolean = props.visible || true;
+        let visible: boolean = true;
+
+        if(props.visible !== undefined) {
+            visible = props.visible;
+        }
 
         const TituloCajaTexto = () => {
             if (props.titulo) {

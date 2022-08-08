@@ -41,7 +41,12 @@ const ACheckBox = React.forwardRef<IRefACheckBox, IPropsACheckBox>(
         props,
         ref
     ) {
-        const visible: boolean = props.visible || true;
+        let visible: boolean = true;
+
+        if (props.visible !== undefined) {
+            visible = props.visible;
+        }
+
         const uuid = useMemo(() => AControl.GenerarUuidControl(), []);
         const refACheckBox = useRef<HTMLInputElement>(null);
 

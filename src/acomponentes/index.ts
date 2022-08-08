@@ -8,6 +8,7 @@ import APanel from './APanel';
 import ARadioBotones from './ARadioBotones';
 import ATitulosPantallas from './ATitulosPantallas';
 import ATablaDinamica from './ATablaDinamica';
+import ADesplegable from './ADesplegable';
 
 import {
     GenerarExcelJSON,
@@ -27,6 +28,7 @@ export{
     ARadioBotones,
     ATitulosPantallas,
     ATablaDinamica,
+    ADesplegable,
 
     /** Generar Excel desde un JSON */
     GenerarExcelJSON,

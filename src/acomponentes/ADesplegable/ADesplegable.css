@@ -1,0 +1,193 @@
+:root{
+    --elemento-seleccionado: #0c67bc59;
+}
+
+.adesplegable{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5em;
+}
+
+.adesplegable-titulo{
+    margin-bottom: 0.5rem;
+    padding-left: 0.3rem;
+    text-align: left;
+    font-weight: normal;
+}
+
+.adesplegable-contenido{
+    display: flex;
+    flex-direction: column;
+}
+
+.adesplegable-texto{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+    vertical-align: middle;
+    align-items: center;
+    cursor: pointer;
+    background: rgb(244, 244, 244);
+    background: linear-gradient(0deg, rgb(244, 244, 244) 0%, rgb(220, 220, 220) 35%, rgb(244, 244, 244) 100%);
+    border: 1px solid #1F94AF;
+    outline: none;
+    border-radius: 5px;
+    padding: 0.2rem;
+}
+
+.adesplegable-texto:hover{
+    background: rgb(244, 244, 244);
+    background: linear-gradient(0deg, rgb(244, 244, 244) 0%, var(--elemento-seleccionado) 50%, rgb(244, 244, 244) 100%);
+}
+
+.adesplegable-texto-seleccionado{
+    cursor: pointer;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.adesplegable-contenido-deshabilitado{
+    cursor: not-allowed !important;
+    background: rgb(174, 174, 174);
+    background: linear-gradient(0deg, rgb(174, 174, 174) 0%, rgb(220, 220, 220) 35%, rgb(174, 174, 174) 100%);
+}
+
+.adesplegable-contenido-deshabilitado-texto{
+    cursor: not-allowed !important;
+}
+
+.adesplegable-opciones{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.225);
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1000 !important;
+    width: 100%;
+}
+
+.adesplegable-opciones-contenedor{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(244, 244, 244);
+    margin: auto;
+
+    z-index: 1000 !important;
+    width: 90%;
+
+    border-radius: 10px;
+    padding: 5px;
+    min-height: min-content;
+    max-height: 80%;
+    overflow: auto;
+}
+
+.adesplegable-opciones-filtro{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 10px;
+    border-bottom: 1px solid #a5a5a5;
+}
+
+.adesplegable-opciones-elementos{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 100%;
+    height: auto;
+    max-height: 90%;
+    overflow-x: auto;
+}
+
+.adesplegable-opciones-elemento{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    transition: all 0.3s ease-in-out;
+    border-radius: 10px;
+}
+
+.adesplegable-opciones-elemento:hover{
+    background-color: var(--elemento-seleccionado);
+    margin-left: 10px;
+    width: 97%;
+}
+
+.adesplegable-item-seleccionado{
+    background-color: var(--elemento-seleccionado);
+    border-radius: 10px;
+}
+
+.adesplegable-item-seleccionado-texto{
+    margin-left: 5px;
+}
+
+.adesplegable-opciones-elemento-texto{
+    display: block;
+    border-bottom: 1px solid #a5a5a5;
+    width: 100%;
+    height: min-content;
+    cursor: pointer;
+}
+
+.adesplegable-acajatexto-filtro-busqueda{
+    width: 60%;
+}
+
+.adesplegable-btn-cancelar{
+    display: inline;
+}
+
+.adesplegable-error{
+    color: red;
+    padding-left: 0.3rem;
+    padding-top: 0.3rem;
+    font-size: 10px;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+/* Cambiar estilo de desplegable a modo escritorio */
+@media(min-width: 720px){
+    .adesplegable-opciones{
+        position: relative;
+        width: 100%;
+        background-color: inherit;
+    }
+
+    .adesplegable-opciones-contenedor{
+        position: absolute;
+        width: 98%;
+        min-height: min-content;
+        max-height: 350px;
+    }
+
+    .adesplegable-opciones-elementos{
+        position: relative;
+    }
+
+    .adesplegable-btn-cancelar{
+        display: none !important;
+    }
+
+    .adesplegable-acajatexto-filtro-busqueda{
+        width: 90%;
+    }
+}

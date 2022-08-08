@@ -30,7 +30,11 @@ const ABotonOpciones = React.forwardRef<ABotonOpcionesRef, ABotonOpcionesProps>(
         props,
         ref
     ){
-        let visible = props.visible || true;
+        let visible = true;
+
+        if(props.visible !== undefined) {
+            visible = props.visible;
+        }
 
         const [ opcionesVisibles, fijarOpcionesVisibles ] = React.useState<boolean>(false);
         const [ uuid, _ ] = React.useState<string>(AControl.GenerarUuidControl());

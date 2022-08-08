@@ -13,9 +13,11 @@ export interface ITitulosPantallasProps {
     estilosTitulo?: React.CSSProperties;
     /** Clase CSS del titulo */
     classNameTitulo?: string;
+    /** Visibilidad del componente */
+    visible?: boolean;
 };
 
-export interface ITitulosPantallasRef{
+export interface ITitulosPantallasRef {
     /** Tipo de AControl */
     TipoAControl: () => string;
     /** UUID del AControl */
@@ -29,27 +31,38 @@ const ATitulosPantallas = React.forwardRef<ITitulosPantallasRef, ITitulosPantall
     function ATitulosPantallasInternon(
         props,
         ref
-    ){
+    ) {
         const uuid = useMemo(() => AControl.GenerarUuidControl(), []);
+
+        let visible: boolean = true;
+
+        if (props.visible !== undefined) {
+            visible = props.visible;
+        }
 
         useImperativeHandle(ref, () => ({
             TipoAControl: () => "ATitulosPantallas",
             Refuuid: () => uuid
         }));
 
-        return(
-            <div
-                className={`atitulospantallas ${props.className || ""}`}
-                style={props.estilos}
-            >
-                <h2
-                    className={props.classNameTitulo || ""}
-                    style={props.estilosTitulo}
+        if (visible) {
+            return (
+                <div
+                    className={`atitulospantallas ${props.className || ""}`}
+                    style={props.estilos}
                 >
-                    {props.titulo}
-                </h2>
-            </div>
-        );
+                    <h2
+                        className={props.classNameTitulo || ""}
+                        style={props.estilosTitulo}
+                    >
+                        {props.titulo}
+                    </h2>
+                </div>
+            );
+        }
+        else {
+            return null;
+        }
     }
 );
 
