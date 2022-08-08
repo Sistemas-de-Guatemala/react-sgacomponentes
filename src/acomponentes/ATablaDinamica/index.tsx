@@ -44,21 +44,20 @@ export interface IEncabezadosDeOperacionesTabla{
         <div className={"atabladinamica-operaciones"}>
             <ACajaTexto
                 className={'atabladinamica-txtfiltro'}
-                classNameTexto={"atabladinamica-txtfiltro"}
+                classNameACajaTexto={"atabladinamica-txtfiltro"}
                 placeholder={props.placeholderFiltro}
                 valor={txt_filtroBusqueda}
                 cambioTexto={(valor: string): void => { fijarTxt_filtroBusqueda(valor); props.filtrarBusqueda(valor); }}
             />
             <div className={"atabladinamica-operaciones-botones"}>
                 <ABotonOpciones
-                    icono={<FiDownload size={20} />}
                     opciones={[
                         <div style={{ width: "100%" }}><FaPrint size={15} /> Imprimir</div>,
                         <div style={{ width: "100%" }}><FaRegFileExcel size={15} /> Descargar Excel</div>
                     ]}
                     opcionSeleccionada={(indice: number): void => { props.btnOpciones(indice); }}
                 >
-                    Descargar
+                    Descargar <FiDownload size={20} />
                 </ABotonOpciones>
             </div>
         </div>
