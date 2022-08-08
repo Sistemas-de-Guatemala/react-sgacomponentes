@@ -51,6 +51,7 @@ const App = () => (
 | AEtiqueta                                                   | Componente de etiqueta                                                  |
 | ACajaTexto                                                  | Componente de caja de texto                                             |
 | ACheckBox                                                   | Componente de checkbox                                                  |
+| ADesplegable                                                | Componente de desplegable con buscador                                  |
 | APaginador                                                  | Componente de paginador                                                 |
 | APanel                                                      | Componente que levanta un modal                                         |
 | ARadioBotones                                               | Componente de radio botones                                             |
