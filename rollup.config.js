@@ -24,7 +24,21 @@ export default {
         peerDepsExternal(),
         resolve(),
         commonjs(),
-        typescript({ useTsconfigDeclarationDir: true }),
+        typescript({
+            useTsconfigDeclarationDir: false,
+            tsconfigOverride: {
+                exclude: [
+                    "**/*.test.ts",
+                    "**/*.test.tsx",
+                    "**/*.spec.ts",
+                    "**/*.spec.tsx",
+                    "**/*.d.ts",
+                    "**/*.d.tsx",
+                    "**/*.stories.tsx",
+                    "**/*.stories.ts"
+                ]
+            }
+        }),
         postcss({
             extensions: ['.css']
         })
