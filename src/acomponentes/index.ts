@@ -9,6 +9,7 @@ import ARadioBotones from './ARadioBotones';
 import ATitulosPantallas from './ATitulosPantallas';
 import ATablaDinamica from './ATablaDinamica';
 import ADesplegable from './ADesplegable';
+import AFotos from './AFotos';
 
 import {
     GenerarExcelJSON,
@@ -21,6 +22,7 @@ export{
     ABoton,
     ABotonOpciones,
     AEtiqueta,
+    AFotos,
     ACajaTexto,
     ACheckBox,
     APaginador,
