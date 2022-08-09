@@ -10,6 +10,7 @@ import ATitulosPantallas from './ATitulosPantallas';
 import ATablaDinamica from './ATablaDinamica';
 import ADesplegable from './ADesplegable';
 import AFotos from './AFotos';
+import ALogoCarga from './ALogoCarga';
 
 import {
     GenerarExcelJSON,
@@ -27,6 +28,7 @@ export{
     ACheckBox,
     APaginador,
     APanel,
+    ALogoCarga,
     ARadioBotones,
     ATitulosPantallas,
     ATablaDinamica,
