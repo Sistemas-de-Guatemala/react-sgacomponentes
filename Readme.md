@@ -1,7 +1,9 @@
 # react-sdgacomponentes
 Librería de componentes basados en react para proyecto de SDG
 
-> :warning: **Este proyecto está en desarrollo por lo tanto no debe ser usado para algún proyecto**
+> :warning: **Advertencia: Este proyecto está en desarrollo por lo tanto no debe ser usado para algún proyecto formal.**
+> :warning: **Warning: This project is under development therefore it should not be used for any formal project.**
+> :warning: **Warning: このプロジェクトは開発中のため、正式なプロジェクトには使用しないでください**
 
 ## Documentación
 [Documentación de react-sdgacomponentes (Click aquí)](https://allam05.github.io/react-sgacomponentes/)
