@@ -11,6 +11,10 @@ export interface ALogoCargaProps {
     estilos?: React.CSSProperties;
     /** Texto que se muestra debajo del logo girando */
     texto?: string;
+    /** Imagen o gif que se mostrará en el logo de carga, está propiedad va a dar a una propiedad src de un img */
+    imagen?: string;
+    /** Texto alternativo de la imagen cuando está cargando */
+    textoAlternativoImagen?: string;
 };
 
 export interface ALogoCargaRef {
@@ -44,18 +48,23 @@ const ALogoCarga = React.forwardRef<ALogoCargaRef, ALogoCargaProps>(
                     >
                         <div className='alogocarga-contenedor'>
                             <div>
+
                                 {
-                                    /*<div className='alogocarga-imagen'>
-                                        <img src={SiscoopLogo} alt='Logo de carga' />
-                                    </div>*/
-                                }
-                                <div className={"alogocarga-lds-ellipsis"}><div></div><div></div><div></div><div></div></div>
-                                {
-                                    props.texto &&
-                                    <div className='alogocarga-texto'>
-                                        {props.texto}
+                                    props.imagen &&
+                                    <div className='alogocarga-imagen'>
+                                        <img src={props.imagen} alt={props.textoAlternativoImagen || "Logo de carga"} />
                                     </div>
                                 }
+
+                                {
+                                    !props.imagen &&
+                                    <div className={"alogocarga-lds-ellipsis"}><div></div><div></div><div></div><div></div></div>
+                                }
+
+                                <div className='alogocarga-texto'>
+                                    {props.texto || "Cargando..."}
+                                </div>
+
                             </div>
                         </div>
                     </div>
