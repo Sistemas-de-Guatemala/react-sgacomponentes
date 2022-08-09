@@ -1,6 +1,6 @@
 {
   "name": "react-sgacomponentes",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Librería de componentes para react",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
@@ -39,6 +39,7 @@
     "rollup": "^2.77.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.32.1",
     "typescript": "^4.7.4",
     "uuid": "^8.3.2",
