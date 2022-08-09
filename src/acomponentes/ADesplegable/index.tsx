@@ -319,8 +319,8 @@ const ADesplegable = React.forwardRef<IADesplegableRef, IADesplegableProps>(
             const [indiceSeleccionado, fijarIndiceSeleccionado] = useState(0);
 
             let muestraFiltro = true;
-            if (props.hasOwnProperty('mostrarFiltro')) {
-                muestraFiltro = props.mostrarFiltro || true;
+            if (props.mostrarFiltro !== undefined) {
+                muestraFiltro = props.mostrarFiltro;
             }
 
             let busquedaPorTecla = "";
