@@ -1,6 +1,5 @@
-import React, { useState, useMemo, useImperativeHandle, useRef } from "react";
+import React, { useId, useState, useMemo, useImperativeHandle, useRef } from "react";
 import './ACajaTexto.css';
-import AControl from './../AUtileriaComponentes/AControl';
 
 import AEtiqueta from './../AEtiqueta';
 
@@ -81,7 +80,7 @@ const ACajaTexto = React.forwardRef<IRefACajaTexto, IPropsACajaTexto>(
     ) {
         const [lbdError, fijarLbdError] = useState<string>("");
         const txtRef = useRef<HTMLInputElement>(null);
-        const uuid: string = useMemo<string>((): string => AControl.GenerarUuidControl(), []);
+        const uuid: string = useId();
 
         useImperativeHandle(ref, () => ({
             TipoAControl: () => "ACajaTexto",

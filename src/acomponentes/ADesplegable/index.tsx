@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useRef, useEffect, useImperativeHandle } from 'react';
+import React, { useId, useState, useRef, useEffect, useImperativeHandle } from 'react';
 import './ADesplegable.css';
 
 // Componentes locales
@@ -7,7 +7,6 @@ import AEtiqueta from './../AEtiqueta';
 import ABoton from './../ABoton';
 
 // Utilidades
-import AControl from '../AUtileriaComponentes/AControl';
 import { IoIosArrowDown, IoIosArrowUp, IoMdSearch } from "react-icons/io";
 
 export interface IADesplegableDatos {
@@ -99,7 +98,7 @@ const ADesplegable = React.forwardRef<IADesplegableRef, IADesplegableProps>(
         const refDivDesplegable = React.createRef<HTMLDivElement>();
 
         // Estados de control
-        const uuid = useMemo(() => AControl.GenerarUuidControl(), []);
+        const uuid = useId();
         const [desplegableHabierto, fijarDesplegableHabierto] = useState(false);
         const [txt_filtroBusqueda, fijarTxt_filtroBusqueda] = useState('');
         const [lbd_error, fijarLbd_error] = useState('');

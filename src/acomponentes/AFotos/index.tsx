@@ -1,6 +1,5 @@
-import React, { useState, useMemo, useEffect, useImperativeHandle, useRef } from 'react';
+import React, { useState, useId, useEffect, useImperativeHandle, useRef } from 'react';
 import './AFotos.css';
-import AControl from './../AUtileriaComponentes/AControl';
 import ABoton from './../ABoton';
 
 import { IoCamera } from "react-icons/io5";
@@ -38,7 +37,7 @@ const AFotos = React.forwardRef<IAFotosRef, IAFotosProps>(
         props,
         ref
     ) {
-        const uuid = useMemo(() => AControl.GenerarUuidControl(), []);
+        const uuid = useId();
         const [medidasFoto, _] = useState({ ancho: props.ancho || 165, alto: props.alto || 240 });
         const [canvasVisible, fijarCanvasVisible] = useState(false);
         const [fotoTomada, fijarFotoTomada] = useState(false);

@@ -1,6 +1,5 @@
-import React, { useMemo, useImperativeHandle } from 'react';
+import React, { useMemo, useImperativeHandle, useId } from 'react';
 import './ALogoCarga.css';
-import AControl from './../AUtileriaComponentes/AControl';
 
 export interface ALogoCargaProps {
     /** Si es falso, el logo carga se esconde */
@@ -30,7 +29,7 @@ const ALogoCarga = React.forwardRef<ALogoCargaRef, ALogoCargaProps>(
         ref
     ) {
 
-        const uuid = useMemo(() => AControl.GenerarUuidControl(), []);
+        const uuid = useId();
 
         useImperativeHandle(ref, () => ({
             TipoAControl: () => 'ALogoCarga',

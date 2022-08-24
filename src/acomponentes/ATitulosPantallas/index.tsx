@@ -1,6 +1,5 @@
-import React, { useMemo, useImperativeHandle } from "react";
+import React, { useImperativeHandle, useId } from "react";
 import './ATitulosPantallas.css';
-import AControl from './../AUtileriaComponentes/AControl';
 
 export interface ITitulosPantallasProps {
     /** Titulo */
@@ -32,7 +31,7 @@ const ATitulosPantallas = React.forwardRef<ITitulosPantallasRef, ITitulosPantall
         props,
         ref
     ) {
-        const uuid = useMemo(() => AControl.GenerarUuidControl(), []);
+        const uuid = useId();
 
         let visible: boolean = true;
 

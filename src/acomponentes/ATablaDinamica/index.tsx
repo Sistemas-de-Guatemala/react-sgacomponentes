@@ -1,8 +1,6 @@
-import React, { useMemo, useState, useEffect, useImperativeHandle } from 'react';
+import React, { useState, useEffect, useImperativeHandle, useId } from 'react';
 import './ATablaDinamica.css';
 
-// Utilidades
-import AControl from './../AUtileriaComponentes/AControl';
 import {
     GenerarExcelJSON,
     TransformarATablaDinamicaAExcel
@@ -114,7 +112,7 @@ const ATablaDinamica = React.forwardRef<IATablaDinamicaRef, IATablaDinamicaProps
         props,
         ref
     ) {
-        const uuid = useMemo(() => AControl.GenerarUuidControl(), []);
+        const uuid = useId();
 
         let filasAMostrarTemp = 15;
 
@@ -594,7 +592,8 @@ const ATablaDinamica = React.forwardRef<IATablaDinamicaRef, IATablaDinamicaProps
                     <div className={"atabladinamica-contenedor-tabla"}>
                         <table
                             className={"atabladinamica-tabla"}
-                            id={uuid}>
+                            id={uuid}
+                        >
                             <RenderizarEncabezadosTabla />
                             <RenderizarDatosTabla />
                         </table>

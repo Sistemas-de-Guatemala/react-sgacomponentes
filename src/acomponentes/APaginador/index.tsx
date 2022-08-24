@@ -1,6 +1,5 @@
-import React, { useImperativeHandle, useMemo, useState, useEffect } from 'react';
+import React, { useImperativeHandle, useId, useState, useEffect } from 'react';
 import './APaginador.css';
-import AControl from './../AUtileriaComponentes/AControl';
 // Componentes
 import ReactPaginate from 'react-paginate';
 
@@ -52,7 +51,7 @@ const APaginador = React.forwardRef<IRefAPaginador, IPropsAPaginador>(
 
         const [ itemsPerPage, setItemsPerPage ] = useState(7);
         const [ items, setItems ] = useState<Array<any>>([]);
-        const uuid = useMemo(() => AControl.GenerarUuidControl(), []);
+        const uuid = useId();
 
         
         useImperativeHandle(ref, () => ({

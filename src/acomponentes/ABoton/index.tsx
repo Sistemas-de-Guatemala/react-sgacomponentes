@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useId } from "react";
 import './ABoton.css';
-import AControl from './../AUtileriaComponentes/AControl';
 
 export interface ABotonProps {
     /** Renderiza objetos dentro del aboton */
@@ -40,7 +39,7 @@ const ABoton = React.forwardRef<ABotonRef, ABotonProps>(
         ref
     ) {
         const refABoton = React.useRef<HTMLButtonElement>(null);
-        const [ uuid, _ ] = React.useState<string>(AControl.GenerarUuidControl());
+        const uuid = useId();
 
         let visible = true;
 

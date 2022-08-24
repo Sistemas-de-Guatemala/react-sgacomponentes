@@ -1,4 +1,4 @@
-import React, { useImperativeHandle } from "react";
+import React, { useImperativeHandle, useId } from "react";
 import './APanel.css';
 
 export interface IPropsAPanel {
@@ -20,6 +20,7 @@ export interface IPropsAPanel {
 
 export interface IRefAPanel {
     TipoAControl: () => string;
+    Refuuid: () => string;
 }
 
 const APanel = React.forwardRef<IRefAPanel, IPropsAPanel>(
@@ -28,8 +29,11 @@ const APanel = React.forwardRef<IRefAPanel, IPropsAPanel>(
         ref
     ) {
 
+        const uuid = useId();
+
         useImperativeHandle(ref, () => ({
-            TipoAControl: () => "APanel"
+            TipoAControl: () => "APanel",
+            Refuuid: () => uuid
         }));
 
         return (
@@ -37,6 +41,7 @@ const APanel = React.forwardRef<IRefAPanel, IPropsAPanel>(
                 {
                     props.visible &&
                     <div
+                        id={uuid}
                         className={"apanel-fondo " + (props.classNameFondo || "")}
                         style={{
                             background: (props.transparente || false) ? 'rgba(0,0,0,0)' : 'rgba(0,0,0,0.5)',

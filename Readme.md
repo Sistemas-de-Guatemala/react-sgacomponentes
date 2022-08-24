@@ -82,8 +82,6 @@ const App = () => (
 | [rollup-plugin-peer-deps-external](https://www.npmjs.com/package/rollup-plugin-peer-deps-external)    | Rollup-plugin-peer-deps-external -> Resuelve los imports de los componentes con NodeJS    |
 | [rollup-plugin-postcss](https://www.npmjs.com/package/rollup-plugin-postcss)                          | Rollup-plugin-postcss -> Compila los componentes con PostCSS                              |
 | [postcss](https://www.npmjs.com/package/postcss)                                                      | PostCSS                                                                                   |
-| [uuid](https://www.npmjs.com/package/uuid)                                                            | Crea un hash para los acomponentes                                                        |
-| [@types/uuid](https://www.npmjs.com/package/@types/uuid)                                              | @types/uuid -> Tipos de uuid                                                              |
 | [react-paginator](https://www.npmjs.com/package/react-paginator)                                      | React-paginator -> Paginador                                                              |
 | [react-icons](https://www.npmjs.com/package/react-icons)                                              | Iconos                                                                                    |
 | [xlsx](https://www.npmjs.com/package/xlsx)                                                            | Librería para la lectura de archivos excel                                                |

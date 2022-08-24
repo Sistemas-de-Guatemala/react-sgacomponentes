@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useId } from "react";
 import './ABotonOpciones.css';
-import AControl from './../AUtileriaComponentes/AControl';
 
 export interface ABotonOpcionesProps{
     children: React.ReactNode;
@@ -37,7 +36,7 @@ const ABotonOpciones = React.forwardRef<ABotonOpcionesRef, ABotonOpcionesProps>(
         }
 
         const [ opcionesVisibles, fijarOpcionesVisibles ] = React.useState<boolean>(false);
-        const [ uuid, _ ] = React.useState<string>(AControl.GenerarUuidControl());
+        const uuid = useId();
         const refABotonOpciones = React.useRef<HTMLButtonElement>(null);
 
         React.useImperativeHandle(ref, () => ({

@@ -1,7 +1,5 @@
-import React, { useMemo, useImperativeHandle } from 'react';
+import React, { useImperativeHandle, useId } from 'react';
 import './ARadioBotones.css';
-
-import AControl from './../AUtileriaComponentes/AControl';
 
 export interface IARadioOpciones {
     /** Texto que se mostrará a la par del ARadioBoton */
@@ -52,7 +50,7 @@ const ARadioBotones = React.forwardRef<IRefARadioBotones, IARadioBotonesProps>(
         props,
         ref
     ) {
-        const uuid = useMemo(() => AControl.GenerarUuidControl(), []);
+        const uuid:string = useId();
 
         useImperativeHandle(ref, () => ({
             TipoAControl: () => 'ARadioBotones',

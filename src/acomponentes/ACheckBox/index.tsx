@@ -1,6 +1,5 @@
-import React, { useRef, useMemo, useImperativeHandle } from "react";
+import React, { useId, useRef, useMemo, useImperativeHandle } from "react";
 import './ACheckBox.css';
-import AControl from './../AUtileriaComponentes/AControl';
 
 export interface IPropsACheckBox {
     /** Indica si el componente está visible o no */
@@ -47,7 +46,7 @@ const ACheckBox = React.forwardRef<IRefACheckBox, IPropsACheckBox>(
             visible = props.visible;
         }
 
-        const uuid = useMemo(() => AControl.GenerarUuidControl(), []);
+        const uuid = useId();
         const refACheckBox = useRef<HTMLInputElement>(null);
 
         useImperativeHandle(ref, () => ({
