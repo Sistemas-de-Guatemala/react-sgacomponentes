@@ -1,3 +1,8 @@
+.abotonopciones-contenedor{
+    display: block;
+    position: absolute;
+}
+
 .abotonopciones{
     display: block;
     color: #767676;
@@ -30,6 +35,11 @@
 
 /* Lista desplegable */
 .abotonopciones-opciones{
+    position: fixed;
+    margin: 0;
+    left: 0;
+    top: inherit;
+
     position: absolute;
     z-index: 1000;
     list-style: none;
@@ -41,6 +51,8 @@
     box-shadow: 0px 3px 14px 1px rgba(0,0,0,0.32);
     -webkit-box-shadow: 0px 3px 14px 1px rgba(0,0,0,0.32);
     -moz-box-shadow: 0px 3px 14px 1px rgba(0,0,0,0.32);
+
+    transform: translateX(min(inherit, calc(100vw - 100%))) translateY(min(inherit, calc(100vh - 100%)));
 }
 
 .abotonopciones-opciones li{

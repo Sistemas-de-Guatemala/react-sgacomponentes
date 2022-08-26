@@ -48,34 +48,35 @@ const ABotonOpciones = React.forwardRef<ABotonOpcionesRef, ABotonOpcionesProps>(
 
         const RenderizarOpciones = () => {
             return(
-                <ul
-                    className={"abotonopciones-opciones"}
-                    onMouseLeave={() => fijarOpcionesVisibles(false)}
-                >
-                    {
-                        props.opciones.map((elemento, indice) => {
-                            return(
-                                <li
-                                    key={"abotonopciones-opciones-" + uuid + "-" + indice}
-                                    tabIndex={props.tabIndice || 0}
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        fijarOpcionesVisibles(false);
-                                        props.opcionSeleccionada(indice);
-                                    }}
-                                >
-                                    {elemento}
-                                </li>
-                            )
-                        })
-                    }
-                </ul>
+                
+                    <ul
+                        className={"abotonopciones-opciones"}
+                        onMouseLeave={() => fijarOpcionesVisibles(false)}
+                    >
+                        {
+                            props.opciones.map((elemento, indice) => {
+                                return(
+                                    <li
+                                        key={"abotonopciones-opciones-" + uuid + "-" + indice}
+                                        tabIndex={props.tabIndice || 0}
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            fijarOpcionesVisibles(false);
+                                            props.opcionSeleccionada(indice);
+                                        }}
+                                    >
+                                        {elemento}
+                                    </li>
+                                )
+                            })
+                        }
+                    </ul>
             );
         };
 
         if(visible){
             return (
-                <>
+                <div className={"abotonopciones-contenedor"}>
                     <button
                         ref={refABotonOpciones}
                         id={uuid}
@@ -94,7 +95,7 @@ const ABotonOpciones = React.forwardRef<ABotonOpcionesRef, ABotonOpcionesProps>(
                         opcionesVisibles &&
                         <RenderizarOpciones />
                     }
-                </>
+                </div>
             );
         }
         else{
