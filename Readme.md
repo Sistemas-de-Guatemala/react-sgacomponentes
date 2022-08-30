@@ -54,6 +54,8 @@ const App = () => (
 | ADesplegable                                                | Componente de desplegable con buscador                                  |
 | APaginador                                                  | Componente de paginador                                                 |
 | APanel                                                      | Componente que levanta un modal                                         |
+| APanelPestanas                                              | Componente contenedor de pestañas                                       |
+| APanelPestana                                               | Componente de pestaña (Va dentro del contenedor de pestañas)            |
 | ARadioBotones                                               | Componente de radio botones                                             |
 | ATitulosPantallas                                           | Componente de titulos de pantallas                                      |
 | ATablaDinamica                                              | Componente de tabla dinamica                                            |

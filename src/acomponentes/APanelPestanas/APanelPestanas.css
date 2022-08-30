@@ -1,0 +1,68 @@
+.apanelpestanas{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.apanelpestanas-navpestanas{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.apanelpestanas-contenedor{
+  display: flex;
+  flex-direction: column;
+}
+
+.apanelpestanas-navpestanas{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  border-bottom: 2px solid rgb(213,213,213);
+  border-image: linear-gradient(90deg, rgba(213,213,213,1) 0%, rgba(2,126,255,1) 51%, rgba(255,255,255,1) 100%) 1;
+}
+
+.apanelpestanas-pestana{
+  list-style: none;
+  margin: 0 10px;
+  padding: 5px 15px;
+  /*border: 2px solid #253545;*/
+  border-bottom: 0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  cursor: pointer;
+  background-color: #003865;
+  color: #fff;
+}
+
+/*
+  Cuando den click en la pestaña tendrá un efecto de botón presionado
+  con transformaciones
+*/
+.apanelpestanas-pestana:active{
+  transform: scale(0.95);
+}
+
+.apanelpestanas-pestana-seleccionada{
+  background: #1EA7FD;
+  color: white;
+}
+
+.apanelpestana-contenedor{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.apanelpestana-contenido{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
