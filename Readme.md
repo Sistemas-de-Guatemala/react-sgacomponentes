@@ -1,8 +1,6 @@
 # react-sdgacomponentes
 Librería de componentes basados en react para proyecto de SDG
 
-> :warning: **Versión Beta.**
-
 ## Documentación
 [Documentación de react-sdgacomponentes (Click aquí)](https://allam05.github.io/react-sgacomponentes/)
 
