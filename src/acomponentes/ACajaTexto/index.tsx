@@ -1,4 +1,4 @@
-import React, { useId, useState, useMemo, useImperativeHandle, useRef } from "react";
+import React, { useId, useState, useImperativeHandle, useRef } from "react";
 import './ACajaTexto.css';
 
 import AEtiqueta from './../AEtiqueta';
@@ -58,6 +58,8 @@ export interface IPropsACajaTexto {
     quitoFocus?: () => void;
     /** Texto que se muestra cuando no hay texto sobre el ACajaTexto */
     placeholder?: string;
+    /** Listado de palabras que funcionaran como Autocompletado */
+    autoCompletado: string[];
 }
 
 export interface IRefACajaTexto {
@@ -193,6 +195,30 @@ const ACajaTexto = React.forwardRef<IRefACajaTexto, IPropsACajaTexto>(
             }
         }
 
+        const Autocompletado = () => {
+            if(props.autoCompletado !== undefined){
+                return(
+                    <datalist id={`acajatexto-autocompletado-${uuid}`}>
+                        {
+
+                            props.autoCompletado.map((elemento, indice) => {
+                                return(
+                                    <option
+                                        key={`acajatexto-autocompletado-opcion-${uuid}-${indice}`}
+                                        value={elemento}
+                                    ></option>
+                                )
+                            })
+
+                        }
+                    </datalist>
+                );
+            }
+            else{
+                return null;
+            }
+        };
+
         if (!visible) {
             return null;
         }
@@ -223,9 +249,11 @@ const ACajaTexto = React.forwardRef<IRefACajaTexto, IPropsACajaTexto>(
                             onBlur={QuitoFoco}
                             pattern={props.expRegular?.toString()}
                             placeholder={props.placeholder}
+                            list={(props.autoCompletado !== undefined) ? `acajatexto-autocompletado-${uuid}` : undefined}
                         />
                         <Icono />
                     </div>
+                    <Autocompletado />
                     <TextoError />
                 </div>
             );

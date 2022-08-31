@@ -16,9 +16,15 @@ const ACajaTextoPlantilla: ComponentStory<typeof ACajaTexto> = (args) => <ACajaT
 
 export const ACajaTextoVisualizacion = ACajaTextoPlantilla.bind({});
 
+const listado_opciones = [];
+for(let i = 0; i < 101; i++){
+    listado_opciones.push(`Opción ${i}`);
+}
+
 ACajaTextoVisualizacion.args = {
     titulo: "Titulo del ACajaTexto",
     placehodler: "Placeholder del ACajaTexto",
     icono: <FiAward size={20} />,
-    estilos: { width: "300px" }
+    estilos: { width: "300px" },
+    autoCompletado: listado_opciones
 }
