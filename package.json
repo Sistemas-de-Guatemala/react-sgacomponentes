@@ -1,6 +1,6 @@
 {
   "name": "react-sgacomponentes",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "Librería de componentes para react",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
