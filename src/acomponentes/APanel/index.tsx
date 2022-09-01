@@ -4,16 +4,26 @@ import './APanel.css';
 export interface IPropsAPanel {
     /** Muestra u oculta el APanel */
     visible: boolean;
+    /** Estilos del fondo */
+    estilosFondo?: React.CSSProperties;
     /** Clase CSS del fondo */
     classNameFondo?: string;
     /** Si es true entonces la transparencia del APanel será del 100% */
     transparente?: boolean;
+    /** Estilos del APanel */
+    estilos?: React.CSSProperties;
     /** Clase CSS */
     className?: string;
+    /** Estilos del titulo */
+    estilosTitulo?: React.CSSProperties;
     /** Clase CSS del Titulo */
     classNameTitulo?: string;
     /** Titulo del APanel */
     titulo?: string;
+    /** Estilos contenido */
+    estilosContenido?: React.CSSProperties;
+    /** Clase CSS contenido */
+    classNameContenido?: string;
     /** Elementos dentro del APanel */
     children?: React.ReactNode;
 }
@@ -44,19 +54,23 @@ const APanel = React.forwardRef<IRefAPanel, IPropsAPanel>(
                         id={uuid}
                         className={"apanel-fondo " + (props.classNameFondo || "")}
                         style={{
-                            background: (props.transparente || false) ? 'rgba(0,0,0,0)' : 'rgba(0,0,0,0.5)',
+                            ...(props.estilosFondo !== undefined ? props.estilosFondo : {}),
+                            background: (props.transparente || false) ? 'rgba(0,0,0,0)' : 'rgba(0,0,0,0.5)'
                         }}
                     >
                         <div
-                            className={"apanel " + props.className}
+                            className={"apanel " + (props.className || "")}
+                            style={props.estilos}
                         >
                             <div
-                                className={"apanel-titulo " + props.classNameTitulo}
+                                className={"apanel-titulo " + (props.classNameTitulo || "")}
+                                style={props.estilosTitulo}
                             >
                                 <p>{props.titulo}</p>
                             </div>
                             <div
-                                className={"apanel-contenido " + props.className}
+                                className={"apanel-contenido " + (props.classNameContenido || "")}
+                                style={props.estilosContenido}
                             >
                                 {props.children}
                             </div>
