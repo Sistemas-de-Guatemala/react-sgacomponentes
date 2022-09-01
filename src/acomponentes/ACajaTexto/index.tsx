@@ -59,7 +59,7 @@ export interface IPropsACajaTexto {
     /** Texto que se muestra cuando no hay texto sobre el ACajaTexto */
     placeholder?: string;
     /** Listado de palabras que funcionaran como Autocompletado */
-    autoCompletado: string[];
+    autoCompletado?: string[];
 }
 
 export interface IRefACajaTexto {

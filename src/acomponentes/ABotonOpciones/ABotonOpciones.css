@@ -1,10 +1,11 @@
 .abotonopciones-contenedor{
     display: block;
-    position: absolute;
+    position: relative;
 }
 
 .abotonopciones{
     display: block;
+    position: relative;
     color: #767676;
     border: 1px solid #767676;
     background-color: white;

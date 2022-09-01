@@ -25,7 +25,7 @@ import {
     IoChevronDownSharp
 } from "react-icons/io5";
 
-export interface IEncabezadosDeOperacionesTabla{
+export interface IEncabezadosDeOperacionesTabla {
     /** Texto que se muestra en el placeholder del ACajaTexto */
     placeholderFiltro: string;
     /** Evento que se ejecuta cuando se aplica el filtro de búsqueda */
@@ -34,7 +34,7 @@ export interface IEncabezadosDeOperacionesTabla{
     btnOpciones: (indice: number) => void;
 }
 
- const EncabezadosDeOperacionesTabla = (props: IEncabezadosDeOperacionesTabla) => {
+const EncabezadosDeOperacionesTabla = (props: IEncabezadosDeOperacionesTabla) => {
 
     const [txt_filtroBusqueda, fijarTxt_filtroBusqueda] = useState("");
 
@@ -47,7 +47,16 @@ export interface IEncabezadosDeOperacionesTabla{
                 valor={txt_filtroBusqueda}
                 cambioTexto={(valor: string): void => { fijarTxt_filtroBusqueda(valor); props.filtrarBusqueda(valor); }}
             />
-            <div className={"atabladinamica-operaciones-botones"}>
+            <ABotonOpciones
+                opciones={[
+                    <div style={{ width: "100%" }}><FaPrint size={15} /> Imprimir</div>,
+                    <div style={{ width: "100%" }}><FaRegFileExcel size={15} /> Descargar Excel</div>
+                ]}
+                opcionSeleccionada={(indice: number): void => { props.btnOpciones(indice); }}
+            >
+                Descargar <FiDownload size={20} />
+            </ABotonOpciones>
+            {/*<div className={"atabladinamica-operaciones-botones"}>
                 <ABotonOpciones
                     opciones={[
                         <div style={{ width: "100%" }}><FaPrint size={15} /> Imprimir</div>,
@@ -57,18 +66,18 @@ export interface IEncabezadosDeOperacionesTabla{
                 >
                     Descargar <FiDownload size={20} />
                 </ABotonOpciones>
-            </div>
+                </div>*/}
         </div>
     );
 }
 
-export interface IATablaDinamicaProps{
+export interface IATablaDinamicaProps {
     /** Titulo de la tabla dinamica, este titulo también saldrá en la impresión */
     titulo?: string;
     /** Encabezados de la tabla dinamica */
-    encabezados: Array<string|number|React.ReactNode>
+    encabezados: Array<string | number | React.ReactNode>
     /** Datos de la tabla dinamica */
-    datos: Array<Array<string|number|React.ReactNode>>
+    datos: Array<Array<string | number | React.ReactNode>>
     /** Si es falso la tabla dinamica se oculta */
     visible?: boolean;
     /** Clase CSS del contenedor de la tabla */
@@ -93,16 +102,16 @@ export interface IATablaDinamicaProps{
     mensajeVacio?: string;
 };
 
-export interface IATablaDinamicaRef{
+export interface IATablaDinamicaRef {
     /** Devuelve que tipo de AControl es */
     TipoAControl: () => string;
     /** UUID del AControl */
     Refuuid: () => string;
 };
 
-export interface IRenderizarBotonesOrdenamientoProps{
+export interface IRenderizarBotonesOrdenamientoProps {
     /** Elemento a renderizar */
-    elemento: string|number|React.ReactNode;
+    elemento: string | number | React.ReactNode;
     /** Indice del elemento */
     indiceOrdenado: number;
 }
@@ -218,7 +227,7 @@ const ATablaDinamica = React.forwardRef<IATablaDinamicaRef, IATablaDinamicaProps
          * @param {number} indicePaginacion 
          * @param {Array<Array<string|number|React.ReactNode>>} datosFiltro 
          */
-        const filtrarDatosFilasXPaginaFiltroConsulta = (numFilas: number, indicePaginacion: number, datosFiltro: Array<Array<string|number|React.ReactNode>>) => {
+        const filtrarDatosFilasXPaginaFiltroConsulta = (numFilas: number, indicePaginacion: number, datosFiltro: Array<Array<string | number | React.ReactNode>>) => {
             const inicioDatos = ((Math.ceil(indicePaginacion) - 1) * numFilas) % datosFiltro.length;
             const finalDatos = Math.ceil(inicioDatos) + Math.ceil(numFilas);
             const datosActuales = datosFiltro.slice(Math.ceil(inicioDatos), Math.ceil(finalDatos));
@@ -582,7 +591,7 @@ const ATablaDinamica = React.forwardRef<IATablaDinamicaRef, IATablaDinamicaProps
 
         if (visible) {
             return (
-                <div className={'atabladinamica ' + (props.hasOwnProperty('className') ? props.className : "")}>
+                <div className={'atabladinamica ' + ((props.className !== undefined) ? props.className : "")}>
                     <RenderizarTitulo />
                     <EncabezadosDeOperacionesTabla
                         placeholderFiltro={props.placeholderFiltro || "Filtrar..."}
