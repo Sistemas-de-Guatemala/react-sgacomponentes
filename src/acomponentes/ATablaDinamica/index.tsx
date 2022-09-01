@@ -56,17 +56,6 @@ const EncabezadosDeOperacionesTabla = (props: IEncabezadosDeOperacionesTabla) =>
             >
                 Descargar <FiDownload size={20} />
             </ABotonOpciones>
-            {/*<div className={"atabladinamica-operaciones-botones"}>
-                <ABotonOpciones
-                    opciones={[
-                        <div style={{ width: "100%" }}><FaPrint size={15} /> Imprimir</div>,
-                        <div style={{ width: "100%" }}><FaRegFileExcel size={15} /> Descargar Excel</div>
-                    ]}
-                    opcionSeleccionada={(indice: number): void => { props.btnOpciones(indice); }}
-                >
-                    Descargar <FiDownload size={20} />
-                </ABotonOpciones>
-                </div>*/}
         </div>
     );
 }
