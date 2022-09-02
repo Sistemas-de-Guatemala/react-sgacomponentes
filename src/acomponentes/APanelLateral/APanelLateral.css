@@ -16,20 +16,21 @@
     display: flex;
     flex-direction: column;
     top: 10%;
-    width: 80%;
-    height: calc(100%);
+    height: 100%;
+    width: 90%;
     background-color: white;
     border-top-left-radius: 5px;
 }
 
 .apanellateral-visible{
-    display: relative !important;
+    transform: translate(0, 0);
+    transition: all 0.5s ease-in-out;
 }
 
 .apanellateral-oculto{
-    display: none !important;
+    transform: translate(100%, 0);
+    transition: all 0.5s ease-in-out;
 }
-
 
 .apanellateral-encabezado{
     display: flex;
