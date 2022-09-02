@@ -18,8 +18,9 @@ export const AFotosVisualizacion = AFotosPlantilla.bind({});
 let foto: string = "";
 
 AFotosVisualizacion.args = {
-    valor: foto,
-    fotoTomada: (valor: string) => {
-        foto = valor;
-    }
+    valor: foto
+}
+
+AFotosVisualizacion.argTypes = {
+    fotoTomada: { action: "fotoTomada" }
 }

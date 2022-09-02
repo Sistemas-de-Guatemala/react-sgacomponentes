@@ -16,7 +16,7 @@ const ACajaTextoPlantilla: ComponentStory<typeof ACajaTexto> = (args) => <ACajaT
 
 export const ACajaTextoVisualizacion = ACajaTextoPlantilla.bind({});
 
-const listado_opciones = [];
+const listado_opciones = Array<string>();
 for(let i = 0; i < 101; i++){
     listado_opciones.push(`Opción ${i}`);
 }
@@ -28,3 +28,9 @@ ACajaTextoVisualizacion.args = {
     estilos: { width: "300px" },
     autoCompletado: listado_opciones
 }
+
+ACajaTextoVisualizacion.argTypes = {
+    cambioTexto: { action: "cambioTexto" },
+    quitoFoco: { action: "quitoFoco" },
+    quitoFocus: { action: "quitoFocus" }
+};

@@ -5,6 +5,7 @@ import ACajaTexto from './ACajaTexto';
 import ACheckBox from './ACheckBox';
 import APaginador from './APaginador';
 import APanel from './APanel';
+import APanelLateral from './APanelLateral';
 import ARadioBotones from './ARadioBotones';
 import ATitulosPantallas from './ATitulosPantallas';
 import ATablaDinamica from './ATablaDinamica';
@@ -32,6 +33,7 @@ export{
     ACheckBox,
     APaginador,
     APanel,
+    APanelLateral,
     APanelPestana,
     APanelPestanas,
     ALogoCarga,

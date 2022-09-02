@@ -65,3 +65,7 @@ APanelPestanasVisualizacion.args = {
         </APanelPestana>
     ]
 }
+
+APanelPestanasVisualizacion.argTypes = {
+    cambioPestana: { action: "cambioPestana" }
+}

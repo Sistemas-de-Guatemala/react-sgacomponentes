@@ -17,6 +17,9 @@ export const ABotonClick = ABotonPlantilla.bind({});
 
 ABotonClick.args = {
     children: "ABotón (Presioname)",
-    tipoBoton: "button",
-    botonPresionado: () => { console.log("Presionaste el botón"); }
+    tipoBoton: "button"
+}
+
+ABotonClick.argTypes = {
+    botonPresionado: { action: "botonPresionado" }
 }

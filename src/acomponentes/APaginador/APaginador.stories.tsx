@@ -17,8 +17,9 @@ export const APaginadorVisualizacion = APaginadorPlantilla.bind({});
 
 APaginadorVisualizacion.args = {
     paginaActual: 1,
-    maxPaginas: 10,
-    cambioPagina: (pagina) => {
-        console.log(pagina);
-    }
+    maxPaginas: 10
+}
+
+APaginadorVisualizacion.argTypes = {
+    cambioPagina: { action: "cambioPagina" }
 }

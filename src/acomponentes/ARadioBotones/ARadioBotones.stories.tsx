@@ -21,6 +21,9 @@ ARadioBotonesVisualizacion.args = {
         { texto: "Opcion 1", valor: "1" },
         { texto: "Opcion 2", valor: "2" },
         { texto: "Opcion 3", valor: "3" }
-    ],
-    cambioSeleccion: (valor) => console.log(valor)
+    ]
+}
+
+ARadioBotonesVisualizacion.argTypes = {
+    cambioSeleccion: { action: "cambioSeleccion" }
 }

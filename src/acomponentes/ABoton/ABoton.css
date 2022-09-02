@@ -34,6 +34,7 @@
 .primario:active{
     background-color: #1582a7;
     color: white;
+    transform: scale(1.01);
 }
 
 .secundario{
@@ -49,6 +50,7 @@
 .secundario:active{
     background-color: #197488;
     color: white;
+    transform: scale(1.01);
 }
 
 .ok{
@@ -64,6 +66,7 @@
 .ok:active{
     background-color: #00991D;
     color: white;
+    transform: scale(1.01);
 }
 
 .peligro{
@@ -79,6 +82,7 @@
 .peligro:active{
     background-color: #911c28;
     color: white;
+    transform: scale(1.01);
 }
 
 .link{
@@ -94,4 +98,5 @@
 .link:active{
     background-color: rgba(0, 0, 0, 0);
     color: #0d6c8b;
+    transform: scale(1.01);
 }

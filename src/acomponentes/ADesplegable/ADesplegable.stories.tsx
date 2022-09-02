@@ -22,3 +22,7 @@ ADesplegableVisualizacion.args = {
     datos: new Array(100).fill(0).map((_, i) => { return {id: i, texto: `Elemento ${i}`}}),
     estilos: { width: "300px" }
 }
+
+ADesplegableVisualizacion.argTypes = {
+    cambioSeleccion: { action: "cambioSeleccion" }
+}

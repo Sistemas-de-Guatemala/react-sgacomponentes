@@ -22,8 +22,9 @@ ABotonOpcionesClick.args = {
         "Opción 2",
         "Opción 3",
         <div>Opción 4</div>
-    ],
-    opcionSeleccionada: (indiceSeleccionado: number) => {
-        console.log("Opción seleccionada: " + indiceSeleccionado);
-    }
+    ]
+}
+
+ABotonOpcionesClick.argTypes = {
+    opcionSeleccionada: { action: "opcionSeleccionada" }
 }

@@ -31,6 +31,7 @@
 .abotonopciones:active{
     background-color: #0C67BC;
     color: white;
+    transform: scale(1.01);
     transition: all 0.2s ease-in-out;
 }
 

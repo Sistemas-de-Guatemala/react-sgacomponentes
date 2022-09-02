@@ -18,3 +18,9 @@ export const ACheckBoxVisualizacion = ACheckBoxPlantilla.bind({});
 ACheckBoxVisualizacion.args = {
     texto: "Titulo del ACheckBox"
 }
+
+ACheckBoxVisualizacion.argTypes = {
+    cambioCheck: { action: "cambioCheck" },
+    quitoFoco: { action: "quitoFoco" },
+    quitoFocus: { action: "quitoFocus" }
+}
