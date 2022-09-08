@@ -5,7 +5,7 @@ Librería de componentes basados en react para proyecto de SDG
 [Documentación de react-sdgacomponentes (Click aquí)](https://allam05.github.io/react-sgacomponentes/)
 
 ## Invitame a un café
-[![](https://www.paypal.com/donate/?hosted_button_id=XPUUVFH8E2BE4)]
+[![](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate/?hosted_button_id=XPUUVFH8E2BE4)
 
 ## Motivación
 Este tipo de componentes se inicia con la idea de crear una librería 100% en español, con la finalidad de que cualquier persona "latinoamericana" pueda utilizarlos sin tener que leer la documentación en inglés y tratar de entender que hacer con los componentes mientras escriben código, al mismo tiempo trabajar con componentes que no necesitan mucha configuración y menos código a la hora de implementar funciones complejas como por ejemplo filtrar, ordenar, generar hojas de cálculo, etc.
