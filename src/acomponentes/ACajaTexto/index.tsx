@@ -7,7 +7,7 @@ export interface IPropsACajaTexto {
     /** Si es falso el ACajaTexto se oculta */
     visible?: boolean;
     /** Texto que se muestra en el ACajaTexto */
-    valor?: string;
+    valor: string;
     /** Evento que se ejecuta cada vez que se teclea algo */
     cambioTexto?: (valor: string) => void;
     /** Titulo que se muestra arriba del ACajaTexto */
@@ -83,6 +83,7 @@ const ACajaTexto = React.forwardRef<IRefACajaTexto, IPropsACajaTexto>(
         const [lbdError, fijarLbdError] = useState<string>("");
         const txtRef = useRef<HTMLInputElement>(null);
         const uuid: string = useId();
+        const [valor, fijarValor] = useState<string>(props.valor);
 
         useImperativeHandle(ref, () => ({
             TipoAControl: () => "ACajaTexto",
@@ -153,7 +154,8 @@ const ACajaTexto = React.forwardRef<IRefACajaTexto, IPropsACajaTexto>(
 
         const cambioTexto = (e: React.ChangeEvent<HTMLInputElement>) => {
             e.preventDefault();
-
+            // @ts-ignore
+            fijarValor(e.target.value);
             if(props.cambioTexto) {
                 props.cambioTexto(e.target.value);
             }
@@ -236,7 +238,7 @@ const ACajaTexto = React.forwardRef<IRefACajaTexto, IPropsACajaTexto>(
                         <input
                             {...props}
                             required={props.requerido}
-                            value={props.valor}
+                            value={valor}
                             type={props.tipo || "text"}
                             name={uuid}
                             id={uuid}
