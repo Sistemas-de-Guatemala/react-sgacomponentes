@@ -12,6 +12,17 @@ Este tipo de componentes se inicia con la idea de crear una librería 100% en es
 
 > :warning: **Atención**: La versión actual necesita afinarse más, ya que no soy un expeto en frontend, pero agradecería cualquier sugerencia para hacer de este proyecto una librería potente para latinoamerica.
 
+## Instalación
+### npm
+```bash
+npm install react-sdgacomponentes
+```
+
+### yarn
+```bash
+yarn add react-sdgacomponentes
+```
+
 ## Comandos de uso
   Este comando empaqueta el proyecto
   ```bash
@@ -25,17 +36,6 @@ Este tipo de componentes se inicia con la idea de crear una librería 100% en es
   ```bash
   yarn build-storybook
   ```
-
-## Instalación
-### npm
-```bash
-npm install react-sdgacomponentes
-```
-
-### yarn
-```bash
-yarn add react-sdgacomponentes
-```
 
 ## Uso
 ### Componentes
