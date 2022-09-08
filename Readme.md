@@ -4,6 +4,14 @@ Librería de componentes basados en react para proyecto de SDG
 ## Documentación
 [Documentación de react-sdgacomponentes (Click aquí)](https://allam05.github.io/react-sgacomponentes/)
 
+## Invitame a un café
+[![](https://www.paypal.com/donate/?hosted_button_id=XPUUVFH8E2BE4)]
+
+## Motivación
+Este tipo de componentes se inicia con la idea de crear una librería 100% en español, con la finalidad de que cualquier persona "latinoamericana" pueda utilizarlos sin tener que leer la documentación en inglés y tratar de entender que hacer con los componentes mientras escriben código, al mismo tiempo trabajar con componentes que no necesitan mucha configuración y menos código a la hora de implementar funciones complejas como por ejemplo filtrar, ordenar, generar hojas de cálculo, etc.
+
+> :warning: **Atención**: La versión actual necesita afinarse más, ya que no soy un expeto en frontend, pero agradecería cualquier sugerencia para hacer de este proyecto una librería potente para latinoamerica.
+
 ## Comandos de uso
   Este comando empaqueta el proyecto
   ```bash
@@ -55,6 +63,7 @@ const App = () => (
 | APanelPestanas                                              | Componente contenedor de pestañas                                       |
 | APanelPestana                                               | Componente de pestaña (Va dentro del contenedor de pestañas)            |
 | ARadioBotones                                               | Componente de radio botones                                             |
+| ASeccion                                                    | Componente que agrupa campos dibujando un borde y un titulo             |
 | ATitulosPantallas                                           | Componente de titulos de pantallas                                      |
 | ATablaDinamica                                              | Componente de tabla dinamica                                            |
 

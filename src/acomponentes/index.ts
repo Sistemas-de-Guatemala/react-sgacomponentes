@@ -12,6 +12,7 @@ import ATablaDinamica from './ATablaDinamica';
 import ADesplegable from './ADesplegable';
 import AFotos from './AFotos';
 import ALogoCarga from './ALogoCarga';
+import ASeccion from './ASeccion';
 import {
     APanelPestanas,
     APanelPestana
@@ -40,6 +41,7 @@ export{
     ARadioBotones,
     ATitulosPantallas,
     ATablaDinamica,
+    ASeccion,
     ADesplegable,
 
     /** Generar Excel desde un JSON */

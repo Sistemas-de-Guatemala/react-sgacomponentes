@@ -1,6 +1,6 @@
 {
   "name": "react-sgacomponentes",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "description": "Librería de componentes para react",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
@@ -8,7 +8,7 @@
   "repository": "https://github.com/Allam05/react-sgacomponentes.git",
   "homepage": "https://allam05.github.io/react-sgacomponentes/",
   "author": "Allam López <xyzalan3030@gmail.com>",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"

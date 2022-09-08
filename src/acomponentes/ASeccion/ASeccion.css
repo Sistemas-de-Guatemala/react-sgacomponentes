@@ -1,0 +1,4 @@
+.aseccion{
+    display: flex;
+    flex-direction: column;
+}
