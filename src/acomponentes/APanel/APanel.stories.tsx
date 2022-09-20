@@ -18,5 +18,13 @@ export const APanelVisualizacion = APanelPlantilla.bind({});
 APanelVisualizacion.args = {
     visible: true,
     titulo: "Titulo del APanel",
+    estilos: {
+        width: "500px"
+    },
+    mostrarCerrar: true,
     children: <p>Contenido del APanel</p>
+}
+
+APanelVisualizacion.argTypes = {
+    eventoCerrar: { action: "eventoCerrar" }
 }

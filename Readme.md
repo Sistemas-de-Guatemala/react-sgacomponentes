@@ -64,8 +64,9 @@ const App = () => (
 | APanelPestana                                               | Componente de pestaña (Va dentro del contenedor de pestañas)            |
 | ARadioBotones                                               | Componente de radio botones                                             |
 | ASeccion                                                    | Componente que agrupa campos dibujando un borde y un titulo             |
-| ATitulosPantallas                                           | Componente de titulos de pantallas                                      |
 | ATablaDinamica                                              | Componente de tabla dinamica                                            |
+| ATabla                                                      | Componente de tabla simple sin tanto filtro                             |
+| ATitulosPantallas                                           | Componente de titulos de pantallas                                      |
 
 ## Lista de utilidades actualmente
 

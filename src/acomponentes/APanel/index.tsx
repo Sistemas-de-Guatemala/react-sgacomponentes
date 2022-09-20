@@ -26,6 +26,10 @@ export interface IPropsAPanel {
     classNameContenido?: string;
     /** Elementos dentro del APanel */
     children?: React.ReactNode;
+    /** Esta props si es false no muestra la X que ejecuta el evento eventoCerrar */
+    mostrarCerrar?: boolean;
+    /** Evento que se ejecuta cuando se presiona la X roja */
+    eventoCerrar?: () => void;
 }
 
 export interface IRefAPanel {
@@ -46,38 +50,50 @@ const APanel = React.forwardRef<IRefAPanel, IPropsAPanel>(
             Refuuid: () => uuid
         }));
 
+        const btnCerrarModal = () => {
+            if(props.eventoCerrar !== undefined) {
+                props.eventoCerrar();
+            }
+        };
+
         return (
-            <>
-                {
-                    props.visible &&
+            <div
+                id={uuid}
+                className={`apanel-fondo ${props.visible ? "" : "apanel-no-visible"}` + (props.classNameFondo || "")}
+                style={{
+                    ...(props.estilosFondo !== undefined ? props.estilosFondo : {}),
+                    background: (props.transparente || false) ? 'rgba(0,0,0,0)' : 'rgba(0,0,0,0.5)'
+                }}
+            >
+                <div
+                    className={`apanel ${props.visible ? "" : "apanel-no-visible"}` + (props.className || "")}
+                    style={props.estilos}
+                >
                     <div
-                        id={uuid}
-                        className={"apanel-fondo " + (props.classNameFondo || "")}
-                        style={{
-                            ...(props.estilosFondo !== undefined ? props.estilosFondo : {}),
-                            background: (props.transparente || false) ? 'rgba(0,0,0,0)' : 'rgba(0,0,0,0.5)'
-                        }}
+                        className={"apanel-titulo"}
                     >
-                        <div
-                            className={"apanel " + (props.className || "")}
-                            style={props.estilos}
-                        >
+                        <p
+                            className={"apanel-titulo-texto " + (props.classNameTitulo || "")}
+                            style={props.estilosTitulo}
+                        >{props.titulo}</p>
+                        {
+                            (props.hasOwnProperty("mostrarCerrar") && props.mostrarCerrar === false) ? null :
                             <div
-                                className={"apanel-titulo " + (props.classNameTitulo || "")}
-                                style={props.estilosTitulo}
+                                className={`apanel-btn-cerrar`}
+                                onClick={btnCerrarModal}
                             >
-                                <p>{props.titulo}</p>
+                                X
                             </div>
-                            <div
-                                className={"apanel-contenido " + (props.classNameContenido || "")}
-                                style={props.estilosContenido}
-                            >
-                                {props.children}
-                            </div>
-                        </div>
+                        }
                     </div>
-                }
-            </>
+                    <div
+                        className={"apanel-contenido " + (props.classNameContenido || "")}
+                        style={props.estilosContenido}
+                    >
+                        {props.children}
+                    </div>
+                </div>
+            </div>
         );
     }
 );

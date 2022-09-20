@@ -1,0 +1,43 @@
+.atabla{
+    width: 100%;
+    border-spacing: 0;
+    border: 1px solid #ccc;
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+    background-color: #fff;
+}
+
+.atabla-oculto{
+    display: none !important;
+}
+
+.atabla-encabezado{
+    background-color: #1EA7FD;
+    color: white;
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.atabla-fila{
+    border-bottom: 1px solid #ccc;
+    transition: all 0.2s ease-in-out;
+}
+
+.atabla-fila:hover{
+    transform: scale(1.01);
+    transition: all 0.2s ease-in-out;
+}
+
+.atabla-fila-par{
+    background-color: #F9F9F9;
+}
+
+.atabla-celda{
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
