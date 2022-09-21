@@ -17,6 +17,7 @@ import {
     APanelPestanas,
     APanelPestana
 } from './APanelPestanas';
+import ATabla from './ATabla';
 
 import {
     GenerarExcelJSON,
@@ -40,6 +41,7 @@ export{
     ALogoCarga,
     ARadioBotones,
     ATitulosPantallas,
+    ATabla,
     ATablaDinamica,
     ASeccion,
     ADesplegable,
