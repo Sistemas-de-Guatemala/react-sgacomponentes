@@ -1,4 +1,4 @@
-import React, { useId } from 'react';
+import React, { useId, useImperativeHandle } from 'react';
 import './ATabla.css';
 
 export interface IATablaProps {
@@ -27,7 +27,10 @@ export interface IATablaProps {
 };
 
 export interface IATablaRef {
-
+    /** Devuelve el tipo de AControl */
+    TipoAControl: () => string;
+    /** UUID del AControl */
+    Refuuid: () => string;
 };
 
 const ATabla = React.forwardRef<IATablaRef, IATablaProps>(
@@ -37,6 +40,11 @@ const ATabla = React.forwardRef<IATablaRef, IATablaProps>(
     ) {
 
         const uuid = useId();
+
+        useImperativeHandle(ref, () => ({
+            TipoAControl: () => 'ATabla',
+            Refuuid: () => uuid
+        }));
 
         return (
             <table
