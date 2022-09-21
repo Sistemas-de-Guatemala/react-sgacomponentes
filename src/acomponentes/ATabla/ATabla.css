@@ -27,13 +27,18 @@
     transition: all 0.2s ease-in-out;
 }
 
-.atabla-fila:hover{
-    transform: scale(1.01);
+.atabla-fila:nth-child(even){
+    background-color: #f9f9f9;
+}
+
+.atabla-fila:nth-child(even):hover{
+    background-color: rgba(57, 192, 237, 0.3);
     transition: all 0.2s ease-in-out;
 }
 
-.atabla-fila-par{
-    background-color: #F9F9F9;
+.atabla-fila:nth-child(odd):hover{
+    background-color: rgba(57, 192, 237, 0.3);
+    transition: all 0.2s ease-in-out;
 }
 
 .atabla-celda{

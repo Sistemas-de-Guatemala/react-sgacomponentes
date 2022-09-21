@@ -79,7 +79,7 @@ const ATabla = React.forwardRef<IATablaRef, IATablaProps>(
                             return (
                                 <tr
                                     key={`atabla-fila-${uuid}-${indiceFila}`}
-                                    className={`atabla-fila ${(indiceFila % 2) ? "atabla-fila-par" : ""} ${props.classNameFilaDatos || ""}`}
+                                    className={`atabla-fila ${props.classNameFilaDatos || ""}`}
                                 >
                                     {
                                         fila.map((celda, indiceCelda) => {
