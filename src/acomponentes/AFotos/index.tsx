@@ -116,10 +116,8 @@ const AFotos = React.forwardRef<IAFotosRef, IAFotosProps>(
         const TomarFoto = () => {
             let video_actual = videoFoto;
 
-            fijarFotoTomada(true);
-            fijarCanvasVisible(false);
     
-            setTimeout(() => {
+            // setTimeout(() => {
 
                 if(canvasFoto.current && video_actual.current) {
                     //@ts-ignore
@@ -128,14 +126,16 @@ const AFotos = React.forwardRef<IAFotosRef, IAFotosProps>(
                     enviarFoto(foto);
                 }
 
-                if(videoFoto.current){
+                if(video_actual.current){
                     //@ts-ignore
-                    videoFoto.current.srcObject.getTracks().forEach(track => {
+                    video_actual.current.srcObject.getTracks().forEach((track) => {
                         track.stop();
                     });
                 }
 
-            }, 100);
+            fijarFotoTomada(true);
+            fijarCanvasVisible(false);
+            // }, 100);
         }
 
         if (visible) {
