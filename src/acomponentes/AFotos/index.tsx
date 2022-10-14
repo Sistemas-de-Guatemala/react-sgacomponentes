@@ -62,15 +62,15 @@ const AFotos = React.forwardRef<IAFotosRef, IAFotosProps>(
         }));
 
         useEffect(() => {
-            if(props.valor !== ""){
+            if (props.valor !== "") {
                 fijarCanvasVisible(false);
                 fijarFotoTomada(true);
-    
+
                 setTimeout(() => {
-    
+
                     let imagenFoto = new Image(medidasFoto.ancho, medidasFoto.alto);
                     imagenFoto.onload = () => {
-                        if(canvasFoto.current != null){
+                        if (canvasFoto.current != null) {
                             //@ts-ignore
                             canvasFoto.current.getContext("2d").drawImage(imagenFoto, 0, 0, medidasFoto.ancho * 2, medidasFoto.alto * 2);
                         }
@@ -85,10 +85,10 @@ const AFotos = React.forwardRef<IAFotosRef, IAFotosProps>(
         const ActivarCanvas = async () => {
             fijarCanvasVisible(true);
             fijarFotoTomada(false);
-    
+
             try {
                 let stream = await navigator.mediaDevices.getUserMedia({
-                    
+
                     video: {
                         width: medidasFoto.ancho * 2,
                         height: medidasFoto.alto * 2
@@ -96,9 +96,9 @@ const AFotos = React.forwardRef<IAFotosRef, IAFotosProps>(
 
                     audio: false
                 });
-    
-    
-                if(videoFoto.current !== null) {
+
+
+                if (videoFoto.current !== null) {
                     videoFoto.current.srcObject = stream;
                 }
             }
@@ -108,7 +108,7 @@ const AFotos = React.forwardRef<IAFotosRef, IAFotosProps>(
         }
 
         const enviarFoto = (foto: string): void => {
-            if(habilitado){
+            if (habilitado) {
                 props.fotoTomada(foto);
             }
         }
@@ -116,22 +116,22 @@ const AFotos = React.forwardRef<IAFotosRef, IAFotosProps>(
         const TomarFoto = () => {
             let video_actual = videoFoto;
 
-    
+
             // setTimeout(() => {
 
-                if(canvasFoto.current && video_actual.current) {
-                    //@ts-ignore
-                    canvasFoto.current.getContext('2d').drawImage(video_actual.current, 0, 0, medidasFoto.ancho * 2, medidasFoto.alto * 2);
-                    const foto:string = canvasFoto.current.toDataURL('image/jpeg', 1.0).split(',')[1];
-                    enviarFoto(foto);
-                }
+            if (canvasFoto.current && video_actual.current) {
+                //@ts-ignore
+                canvasFoto.current.getContext('2d').drawImage(video_actual.current, 0, 0, medidasFoto.ancho * 2, medidasFoto.alto * 2);
+                const foto: string = canvasFoto.current.toDataURL('image/jpeg', 1.0).split(',')[1];
+                enviarFoto(foto);
+            }
 
-                if(video_actual.current){
-                    //@ts-ignore
-                    video_actual.current.srcObject.getTracks().forEach((track) => {
-                        track.stop();
-                    });
-                }
+            if (video_actual.current) {
+                //@ts-ignore
+                video_actual.current.srcObject.getTracks().forEach((track) => {
+                    track.stop();
+                });
+            }
 
             fijarFotoTomada(true);
             fijarCanvasVisible(false);
@@ -144,34 +144,27 @@ const AFotos = React.forwardRef<IAFotosRef, IAFotosProps>(
                     className={`afotos ${props.className || ""}`}
                     style={props.estilos}
                 >
-                    {
-                        (!canvasVisible && !fotoTomada) &&
-                        <div className={"afotos-div-vacio"}></div>
-                    }
+                    <div className={"afotos-div-vacio"} style={{ display: (!canvasVisible && !fotoTomada) ? "block" : "none" }}></div>
 
-                    {
-                        (canvasVisible && !fotoTomada) &&
-                        <video
-                            ref={videoFoto}
-                            id={`afotos-video-${uuid}`}
-                            className={"afotos-video-elemento"}
-                            width={props.ancho || medidasFoto.ancho}
-                            height={props.alto || medidasFoto.alto}
-                            autoPlay
-                        >
-                        </video>
-                    }
+                    <video
+                        ref={videoFoto}
+                        id={`afotos-video-${uuid}`}
+                        className={"afotos-video-elemento"}
+                        width={props.ancho || medidasFoto.ancho}
+                        height={props.alto || medidasFoto.alto}
+                        autoPlay
+                        style={{ display: (canvasVisible && !fotoTomada) ? "block" : "none" }}
+                    >
+                    </video>
 
-                    {
-                        (!canvasVisible && fotoTomada) &&
-                        <canvas
-                            ref={canvasFoto}
-                            id={`afotos-canvas-${uuid}`}
-                            className={"afotos-canvas-elemento"}
-                            width={props.ancho || medidasFoto.ancho}
-                            height={props.alto || medidasFoto.alto}
-                        ></canvas>
-                    }
+                    <canvas
+                        ref={canvasFoto}
+                        id={`afotos-canvas-${uuid}`}
+                        className={"afotos-canvas-elemento"}
+                        width={props.ancho || medidasFoto.ancho}
+                        height={props.alto || medidasFoto.alto}
+                        style={{ display: (!canvasVisible && fotoTomada) ? "block" : "none" }}
+                    ></canvas>
 
                     {(
                         !canvasVisible &&
