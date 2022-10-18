@@ -1,5 +1,9 @@
 import React, { useState, useId, useEffect, useImperativeHandle, useRef } from 'react';
 import './AFotos.css';
+import {
+    ImgDefecto
+} from './AFotosRecursos';
+import APanel from './../APanel';
 import ABoton from './../ABoton';
 
 import { IoCamera } from "react-icons/io5";
@@ -38,159 +42,120 @@ const AFotos = React.forwardRef<IAFotosRef, IAFotosProps>(
         ref
     ) {
         const uuid = useId();
-        const [medidasFoto, _] = useState({ ancho: props.ancho || 165, alto: props.alto || 240 });
-        const [canvasVisible, fijarCanvasVisible] = useState(false);
-        const [fotoTomada, fijarFotoTomada] = useState(false);
-
+        const [ panelFotoVisible, fijarPanelFotoVisible ] = useState(false);
+        const [ valorImg, fijarValorImg ] = useState(ImgDefecto);
         const videoFoto = useRef<HTMLVideoElement>(null);
         const canvasFoto = useRef<HTMLCanvasElement>(null);
+        const imgFoto = useRef<HTMLImageElement>(null);
 
-        let visible = true;
-        let habilitado = true;
-        if (props.visible !== undefined) {
-            visible = props.visible;
-        }
+        let visible: boolean = props.visible === undefined ? true : props.visible;
 
-        if (props.habilitado !== undefined) {
-            habilitado = props.habilitado;
-        }
 
-        useImperativeHandle(ref, () => ({
-            TipoAControl: () => "AFotos",
-            Refuuid: () => uuid,
-            Valor: () => props.valor
-        }));
+        const ActivarCamara = async () => {
+            fijarPanelFotoVisible(true);
 
-        useEffect(() => {
-            if (props.valor !== "") {
-                fijarCanvasVisible(false);
-                fijarFotoTomada(true);
-
-                setTimeout(() => {
-
-                    let imagenFoto = new Image(medidasFoto.ancho, medidasFoto.alto);
-                    imagenFoto.onload = () => {
-                        if (canvasFoto.current != null) {
-                            //@ts-ignore
-                            canvasFoto.current.getContext("2d").drawImage(imagenFoto, 0, 0, medidasFoto.ancho * 2, medidasFoto.alto * 2);
-                        }
-                    };
-
-                    imagenFoto.src = "data:image/png;base64," + props.valor;
-
-                }, 10);
-            }
-        }, [props.valor]);
-
-        const ActivarCanvas = async () => {
-            fijarCanvasVisible(true);
-            fijarFotoTomada(false);
-
-            try {
-                let stream = await navigator.mediaDevices.getUserMedia({
-
+            try{
+                const stream = await navigator.mediaDevices.getUserMedia({
                     video: {
-                        width: medidasFoto.ancho * 2,
-                        height: medidasFoto.alto * 2
+                        width: props.ancho || 720,
+                        height: props.alto || 480
                     },
-
                     audio: false
                 });
 
-
-                if (videoFoto.current !== null) {
+                if (videoFoto.current) {
                     videoFoto.current.srcObject = stream;
+                    videoFoto.current.play();
                 }
             }
-            catch (err) {
-                console.log(err);
+            catch(e: any){
+                console.log(e);
             }
-        }
+        };
 
-        const enviarFoto = (foto: string): void => {
-            if (habilitado) {
-                props.fotoTomada(foto);
+        const CerrarCamara = () => {
+            if (videoFoto.current) {
+                // @ts-ignore
+                videoFoto.current.srcObject?.getTracks().forEach(track => track.stop());
             }
-        }
+
+            fijarPanelFotoVisible(false);
+        };
 
         const TomarFoto = () => {
-            let video_actual = videoFoto;
-
-
-            // setTimeout(() => {
-
-            if (canvasFoto.current && video_actual.current) {
-                //@ts-ignore
-                canvasFoto.current.getContext('2d').drawImage(video_actual.current, 0, 0, medidasFoto.ancho * 2, medidasFoto.alto * 2);
-                const foto: string = canvasFoto.current.toDataURL('image/jpeg', 1.0).split(',')[1];
-                enviarFoto(foto);
+            if (videoFoto.current && canvasFoto.current && imgFoto.current) {
+                const context = canvasFoto.current.getContext('2d');
+                if (context) {
+                    context.drawImage(videoFoto.current, 0, 0, imgFoto.current.width, imgFoto.current.height);
+                    const valor = canvasFoto.current.toDataURL('image/png').split(',')[1];
+                    fijarValorImg(valor);
+                    fijarPanelFotoVisible(false);
+                    props.fotoTomada(valor);
+                    CerrarCamara();
+                }
             }
+        };
 
-            if (video_actual.current) {
-                //@ts-ignore
-                video_actual.current.srcObject.getTracks().forEach((track) => {
-                    track.stop();
-                });
-            }
-
-            fijarFotoTomada(true);
-            fijarCanvasVisible(false);
-            // }, 100);
-        }
-
-        if (visible) {
-            return (
-                <div
-                    className={`afotos ${props.className || ""}`}
-                    style={props.estilos}
-                >
-                    <div className={"afotos-div-vacio"} style={{ display: (!canvasVisible && !fotoTomada) ? "block" : "none" }}></div>
-
-                    <video
-                        ref={videoFoto}
-                        id={`afotos-video-${uuid}`}
-                        className={"afotos-video-elemento"}
-                        width={props.ancho || medidasFoto.ancho}
-                        height={props.alto || medidasFoto.alto}
-                        autoPlay
-                        style={{ display: (canvasVisible && !fotoTomada) ? "block" : "none" }}
-                    >
-                    </video>
-
-                    <canvas
-                        ref={canvasFoto}
-                        id={`afotos-canvas-${uuid}`}
-                        className={"afotos-canvas-elemento"}
-                        width={props.ancho || medidasFoto.ancho}
-                        height={props.alto || medidasFoto.alto}
-                        style={{ display: (!canvasVisible && fotoTomada) ? "block" : "none" }}
-                    ></canvas>
-
-                    {(
-                        !canvasVisible &&
-                        <ABoton
-                            className={'afotos-btn-tomar-foto'}
-                            botonPresionado={() => { ActivarCanvas(); }}
-                        >
-                            Tomar Foto
-                        </ABoton>
-                    )}
-
-
-                    {(
-                        canvasVisible &&
-                        <ABoton
-                            className={'afotos-btn-tomar-foto'}
-                            botonPresionado={() => { TomarFoto(); }}
-                        >
-                            <IoCamera size={20} />
-                        </ABoton>
-                    )}
-                </div>
-            );
-        }
-        else {
+        if(!visible) {
             return null;
+        }
+        else{
+            return(
+                <>
+                    <div
+                        className={`afotos ${props.className || ""}`}
+                        style={props.estilos}
+                    >
+                        <img
+                            ref={imgFoto}
+                            className={`afotos-img`}
+                            src={`data:image/png;base64,${valorImg}`}
+                            alt={"Imagen de la cámara"}
+                        />
+
+                        <ABoton
+                            botonPresionado={ActivarCamara}
+                            className={"afotos-btn-tomar-foto"}
+                        >
+                            <IoCamera size={25} />
+                        </ABoton>
+                    </div>
+                    <APanel
+                        visible={panelFotoVisible}
+                        titulo={"Tomar foto"}
+                        eventoCerrar={CerrarCamara}
+                        classNameContenido={`afotos-panel-contenido`}
+                    > 
+                        <video
+                            ref={videoFoto}
+                            className={"afotos-video"}
+                            controls={false}
+                        >
+                        </video>
+
+                        <canvas
+                            ref={canvasFoto}
+                            className={"afotos-canvas"}
+                        ></canvas>
+
+                        <div
+                            className={"afotos-panel-controles"}
+                        >
+                            <ABoton
+                                botonPresionado={TomarFoto}
+                            >
+                                Tomar foto
+                            </ABoton>
+                            <ABoton
+                                tipoBotonColor='peligro'
+                                botonPresionado={CerrarCamara}
+                            >
+                                Cancelar
+                            </ABoton>
+                        </div>
+                    </APanel>
+                </>
+            );
         }
     }
 )
