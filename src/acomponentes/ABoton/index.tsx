@@ -1,5 +1,6 @@
-import React, { useId } from "react";
-import './ABoton.css';
+import React, { useId } from "react"
+import './../estilosgenerales.css'
+import './ABoton.css'
 
 export interface ABotonProps {
     /** Renderiza objetos dentro del aboton */
@@ -43,39 +44,34 @@ const ABoton = React.forwardRef<ABotonRef, ABotonProps>(
 
         let visible = true;
 
-        if(props.visible !== undefined) {
+        if (props.visible !== undefined) {
             visible = props.visible;
         }
 
         React.useImperativeHandle(ref, () => ({
             Refuuid: () => uuid,
-            TipoAControl: ():string => "ABoton",
-            focus: ():void => refABoton.current?.focus(),
-            foco: ():void => refABoton.current?.focus()
+            TipoAControl: (): string => "ABoton",
+            focus: (): void => refABoton.current?.focus(),
+            foco: (): void => refABoton.current?.focus()
         }));
 
 
         let tipoBotonColor = props.tipoBotonColor || "primario";
 
         return (
-            <>
-                {
-                    visible &&
-                    <button
-                        id={uuid}
-                        ref={refABoton}
-                        className={`aboton ${tipoBotonColor} ${props.className || ""} ` + (props.hasOwnProperty('habilitado') ? props.habilitado ? "" : "aboton-inhabilitado" : "")}
-                        type={props.tipoBoton || "button"}
-                        style={props.estilos}
-                        onClick={props.botonPresionado}
-                        tabIndex={props.tabIndice}
-                        disabled={(props.hasOwnProperty("habilitado") ? !props.habilitado : false)}
-                        autoFocus={props.autoFocus || props.autoFoco}
-                    >
-                        {props.children}
-                    </button>
-                }
-            </>
+            <button
+                id={uuid}
+                ref={refABoton}
+                className={`aboton aboton-${tipoBotonColor} ${props.className || ""} ${visible ? "" : "no-visible"} ` + (props.hasOwnProperty('habilitado') ? props.habilitado ? "" : "aboton-inhabilitado" : "")}
+                type={props.tipoBoton || "button"}
+                style={props.estilos}
+                onClick={props.botonPresionado}
+                tabIndex={props.tabIndice}
+                disabled={(props.hasOwnProperty("habilitado") ? !props.habilitado : false)}
+                autoFocus={props.autoFocus || props.autoFoco}
+            >
+                {props.children}
+            </button>
         );
     }
 );

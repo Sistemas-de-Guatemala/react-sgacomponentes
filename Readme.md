@@ -97,3 +97,4 @@ const App = () => (
 | [@types/file-saver](https://www.npmjs.com/package/@types/file-saver)                                  | @types/file-saver -> Tipos de file-saver                                                  |
 | [react-children-utilities](https://www.npmjs.com/package/react-children-utilities)                    | React-children-utilities -> Utilidades para los hijos de react                            |
 | [rollup-plugin-terser](https://www.npmjs.com/package/rollup-plugin-terser)                            | Sirve para hacer un minificado del código (ver archivo rollup.config.js)                  |
+| [@storybook/cli](https://www.npmjs.com/package/@storybook/cli)                                        | Sirve para ejecutar storybook                                                             |

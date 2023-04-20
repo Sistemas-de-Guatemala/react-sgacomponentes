@@ -24,8 +24,13 @@ export default {
     plugins: [
         terser(),
         peerDepsExternal(),
-        resolve(),
-        commonjs(),
+        resolve({
+            preferBuiltins: true
+        }),
+        commonjs({
+            transformMixedEsModules: true,
+            'react-icons': ['__assign']
+        }),
         typescript({
             useTsconfigDeclarationDir: false,
             tsconfigOverride: {

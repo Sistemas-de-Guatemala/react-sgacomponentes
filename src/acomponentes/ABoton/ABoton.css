@@ -21,82 +21,89 @@
     cursor: not-allowed;
 }
 
-.primario{
+.aboton-primario{
     background-color: #1952F6;
     color: white;
 }
 
-.primario:hover, .primario:focus{
-    background-color: #116c8a;
+.aboton-primario:hover, .aboton-primario:focus{
+    background-color: #283593;
     color: white;
+    outline-color: #1952F6;
 }
 
-.primario:active{
+.aboton-primario:active{
     background-color: #1582a7;
     color: white;
-    transform: scale(1.01);
+    transform: translateY(1px);
 }
 
-.secundario{
+.aboton-secundario{
     background-color: #1F94AF;
     color: white;
+    transition: all 0.2s ease-in-out;
 }
 
-.secundario:hover, .secundario:focus{
+.aboton-secundario:hover, .aboton-secundario:focus{
     background-color: #125868;
     color: white;
+    outline-color: #1F94AF;
 }
 
-.secundario:active{
+.aboton-secundario:active{
     background-color: #197488;
     color: white;
-    transform: scale(1.01);
+    transform: translateY(1px);
 }
 
-.ok{
+.aboton-ok{
     background-color: #00BB2D;
     color: white;
+    transition: all 0.2s ease-in-out;
 }
 
-.ok:hover, .ok:focus{
+.aboton-ok:hover, .aboton-ok:focus{
     background-color: #00aa28;
     color: white;
+    outline-color: #00BB2D;
 }
 
-.ok:active{
+.aboton-ok:active{
     background-color: #00991D;
     color: white;
-    transform: scale(1.01);
+    transform: translateY(1px);
 }
 
-.peligro{
+.aboton-peligro{
     background-color: #DC3545;
     color: white;
+    transition: all 0.2s ease-in-out;
 }
 
-.peligro:hover, .peligro:focus{
+.aboton-peligro:hover, .aboton-peligro:focus{
     background-color: #b32a38;
     color: white;
+    outline-color: #DC3545;
 }
 
-.peligro:active{
+.aboton-peligro:active{
     background-color: #911c28;
     color: white;
-    transform: scale(1.01);
+    transform: translateY(1px);
 }
 
-.link{
+.aboton-link{
     background-color: rgba(0, 0, 0, 0);
     color: #05a8df;
 }
 
-.link:hover, .link:focus{
-    background-color: rgba(0, 0, 0, 0);
-    color: #02769c;
+.aboton-link:hover, .aboton-link:focus{
+    background-color: #E0F3FF;
+    outline-color: #029CFD;
 }
 
-.link:active{
+.aboton-link:active{
     background-color: rgba(0, 0, 0, 0);
     color: #0d6c8b;
-    transform: scale(1.01);
+    transform: translateY(1px);
 }
