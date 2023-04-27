@@ -1,68 +1,160 @@
-import React, { useId, useState, useImperativeHandle, useRef } from "react";
-import './ACajaTexto.css';
+import React, { useId, useImperativeHandle, useState, useRef } from 'react'
+import './../estilosgenerales.css'
+import './ACajaTexto.css'
 
-import AEtiqueta from './../AEtiqueta';
-
-export interface IPropsACajaTexto {
-    /** Si es falso el ACajaTexto se oculta */
-    visible?: boolean;
-    /** Texto que se muestra en el ACajaTexto */
-    valor: string;
-    /** Evento que se ejecuta cada vez que se teclea algo */
-    cambioTexto?: (valor: string) => void;
-    /** Titulo que se muestra arriba del ACajaTexto */
-    titulo?: string;
-    /** El icono se coloca a la derecha del ACajaTexto */
-    icono?: React.ReactNode;
-    /** Le asigna estilos directamente al contenedor del ACajaTexto */
-    estilos?: React.CSSProperties;
-    /**
-     * Funciona comunmente como un input html
-     * @example
-     * <input type="date" />
-     */
-    tipo?: string;
-    /** Si es true, mostrará un mensaje de alerta en la pantalla */
-    requerido?: boolean;
-    /** Recibe una expresión regular que se validará en el ACajaTexto indicando que no es válido */
-    expRegular?: RegExp;
-    /** Clase CSS del contenedor */
-    className?: string;
-    /** Clase CSS del Titulo */
-    classNameTitulo?: string;
-    /** Estilos del titulo */
-    estilosTitulo?: React.CSSProperties;
-    /** Clase CSS del label de Error */
-    classNameError?: string;
-    /** Estilos del label de Error */
-    estilosError?: React.CSSProperties;
-    /** Clase CSS del Icono */
-    classNameIcono?: string;
-    /** Estilos del icono */
-    estilosIcono?: React.CSSProperties;
-    /** Clase CSS del Input */
-    classNameACajaTexto?: string;
-    /** Estilos del input */
-    estilosACajaTexto?: React.CSSProperties;
-    /** Si es falso el input no dejará que se escriba sobre el */
-    habilitado?: boolean;
-    /** Si es true pone el foco sobre el ACajaTexto */
-    autoFocus?: boolean;
-    /** Si es true, pone el foco sobre el ACajaTexto */
-    autoFoco?: boolean;
-    /** Indice el AControl */
-    tabIndice?: number;
-    /** Evento que se ejecuta cuando el cursor se va del ACajaTexto */
-    quitoFoco?: () => void;
-    /** Evento que se ejecuta cuando el cursor se va del ACajaTexto */
-    quitoFocus?: () => void;
-    /** Texto que se muestra cuando no hay texto sobre el ACajaTexto */
-    placeholder?: string;
-    /** Listado de palabras que funcionaran como Autocompletado */
-    autoCompletado?: string[];
+interface ITituloACajaTextoProps {
+    /** Clase CSS del titulo del ACajaTexto */
+    className?: string
+    /** Estilos del titulo del ACajaTexto */
+    estilos?: React.CSSProperties
+    /** Atributo for del titulo del ACajaTexto */
+    para?: string
+    /** Contenido del titulo del TituloACajaTexto */
+    children: React.ReactNode
 }
 
-export interface IRefACajaTexto {
+const TituloACajaTexto = (
+    props: ITituloACajaTextoProps
+): JSX.Element => {
+
+    return(
+        <label
+            className={`acajatexto-titulo ${props.className}`}
+            style={props.estilos}
+            htmlFor={props.para}
+        >{props.children}</label>
+    );
+};
+
+interface IIconoACajaTextoIzquierdaProps {
+    /** Clase CSS del icono */
+    className?: string
+    /** Estilos del icono */
+    estilos?: React.CSSProperties
+    /** Contenido del icono */
+    children?: React.ReactNode
+}
+
+const IconoACajaTextoIzquierda = (props: IIconoACajaTextoIzquierdaProps) => {
+    return(
+        <div className={`acajatexto-icono-izquierda ${props.className}`} style={props.estilos}>{props.children}</div>
+    )
+}
+
+interface IIconoACajaTextoDerechaProps {
+    /** Clase CSS del icono */
+    className?: string
+    /** Estilos del icono */
+    estilos?: React.CSSProperties
+    /** Contenido del icono */
+    children?: React.ReactNode
+}
+
+const IconoACajaTextoDerecha = (props: IIconoACajaTextoDerechaProps) => {
+    return(
+        <div className={`acajatexto-icono-derecha ${props.className}`} style={props.estilos}>{props.children}</div>
+    )
+}
+
+interface IMaxCaracteresACajaTextoProps {
+    /** Clase CSS del max caracteres */
+    className?: string
+    /** Estilos del max caracteres */
+    estilos?: React.CSSProperties
+    /** Maximo de caracteres a mostrar */
+    maxCaracteres: number
+    /** Caracteres actuales */
+    caracteresActuales: number
+}
+
+const MaxCaracteresACajaTexto = (props: IMaxCaracteresACajaTextoProps) => {
+    return(
+        <div className={`acajatexto-max-caracteres ${props.className || ""}`} style={props.estilos}>Carácteres {props.caracteresActuales}/{props.maxCaracteres}</div>
+    )
+}
+
+interface IEtiquetaErrorACajaTexto{
+    /** Clase CSS de la etiqueta de error */
+    className?: string
+    /** Estilos de la etiqueta de error */
+    estilos?: React.CSSProperties
+    /** Mensaje de error */
+    msjError?: string
+}
+
+
+const EtiquetaErrorACajaTexto = (props: IEtiquetaErrorACajaTexto) => {
+    return(
+        <div className={`acajatexto-error ${props.className || ""}`} style={props.estilos}>{props.msjError}</div>
+    )
+}
+
+export interface IACajaTextoProps {
+    /** Clase CSS del contenedor del ACajaTexto */
+    classNameContenedor?: string
+    /** Estilos del contenedor del acajatexto */
+    estilosContenedor?: React.CSSProperties
+    /** Titulo del ACajaTexto, si existe se renderiza, si no solo muestra el input */
+    titulo?: string | JSX.Element
+    /** Clase CSS del titulo del ACajaTexto */
+    classNameTitulo?: string
+    /** Estilos del titulo del ACajaTexto */
+    estilosTitulo?: React.CSSProperties
+    /** Valor del ACajaTexto */
+    valor: string
+    /** Funcion que se ejecuta cuando cambia el valor del ACajaTexto */
+    cambioTexto: (valor: string) => void
+    /** Clase CSS del ACajaTexto */
+    classNameACajaTexto?: string
+    /** Clase CSS del ACajaTexto */
+    estilosACajaTexto?: React.CSSProperties
+    /** Indica si el ACajaTexto es visible o no */
+    visible?: boolean
+    /** Indica si el ACajaTexto está deshabilitado o no */
+    habilitado?: boolean
+    /** Icono que se muestra a la izquierda del ACajaTexto */
+    iconoIzquierda?: JSX.Element
+    /** Texto por defecto en el ACajaTexto cuando está vacío */
+    placeholder?: string
+    /** Lista de opciones para el autoCompletado */
+    autoCompletado?: string[]
+    /** Se ejecuta cuando el usuario quita el foco del campo */
+    quitoFoco?: () => void
+    /** Se ejecuta cuando el usuario quita el focus del campo */
+    quitoFocus?: () => void
+    /** TabIndex del ACajaTexto */
+    tabIndice?: number
+    /** Indica si el ACajaTexto es requerido o no */
+    requerido?: boolean
+    /** Estilos del icono de la izquierda */
+    estilosIconoIzquierda?: React.CSSProperties
+    /** Clase CSS del icono de la izquierda */
+    classNameIconoIzquierda?: string
+    /** Icono de la Derecha */
+    iconoDerecha?: JSX.Element
+    /** Estilos del icono de la derecha */
+    estilosIconoDerecha?: React.CSSProperties
+    /** Clase CSS del icono de la derecha */
+    classNameIconoDerecha?: string
+    /** Maximo de caracteres que se escribiran */
+    maxCarateres?: number
+    /** Indica si se muestra el contador de caracteres */
+    mostrarMaxCaracteres?: boolean
+    /** Clase CSS del mensaje de error */
+    classNameError?: string
+    /** Estilos del mensaje de error */
+    estilosError?: React.CSSProperties
+    /** Mensaje de error */
+    msjError?: string
+    /** Tipo de entrada del ACajaTexto */
+    tipoEntrada?: "text" | "password" | "number" | "email" | "tel" | "url" | "search" | "date" | "time" | "datetime-local" | "month" | "week" | "color"
+    /** Indica si el ACajaTexto tiene el foco o no */
+    autoFoco?: boolean
+    /** Retorna el nombre de la tecla presionada */
+    eventoTeclaPresionada?: (e: string) => void
+}
+
+export interface IACajaTextoRef{
     /** Retorna que tipo de AControl es */
     TipoAControl: () => string;
     /** Devuelve el ID del ACajaTexto */
@@ -75,14 +167,17 @@ export interface IRefACajaTexto {
     foco: () => void;
 }
 
-const ACajaTexto = React.forwardRef<IRefACajaTexto, IPropsACajaTexto>(
-    function ACajaTextoInterno (
+/**
+ * Componente que representa una caja de texto con un titulo, iconos, validaciones y con diseño preestablecido para el proyecto
+ */
+const ACajaTexto = React.forwardRef<IACajaTextoRef, IACajaTextoProps>(
+    function ACajaTextoInterno(
         props,
         ref
-    ) {
-        const [lbdError, fijarLbdError] = useState<string>("");
+    ){
+        const uuid = useId()
         const txtRef = useRef<HTMLInputElement>(null);
-        const uuid: string = useId();
+        const [ lbdError, fijarLbdError ] = useState<string>("")
 
         useImperativeHandle(ref, () => ({
             TipoAControl: () => "ACajaTexto",
@@ -96,6 +191,7 @@ const ACajaTexto = React.forwardRef<IRefACajaTexto, IPropsACajaTexto>(
                 }
 
                 if (habilitado) {
+                    txtRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" })
                     txtRef.current?.focus();
                 }
             },
@@ -107,65 +203,11 @@ const ACajaTexto = React.forwardRef<IRefACajaTexto, IPropsACajaTexto>(
                 }
 
                 if (habilitado) {
+                    txtRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" })
                     txtRef.current?.focus();
                 }
             }
         }));
-
-        let visible: boolean = true;
-
-        if(props.visible !== undefined) {
-            visible = props.visible;
-        }
-
-        const TituloCajaTexto = () => {
-            if (props.titulo) {
-                return (
-                    <AEtiqueta
-                        para={uuid}
-                        estilos={props.estilosTitulo}
-                        className={props.classNameTitulo}
-                    >
-                        {props.titulo}
-                    </AEtiqueta>
-                );
-            }
-            else {
-                return null;
-            }
-        };
-
-        const TextoError = () => {
-            if (lbdError === "") {
-                return null;
-            }
-            else {
-                return (
-                    <AEtiqueta
-                        className={`acajatexto-error ${props.classNameError || ""}`}
-                        estilos={props.estilosError}
-                    >
-                        {lbdError}
-                    </AEtiqueta>
-                )
-            }
-        }
-
-        const cambioTexto = (e: React.ChangeEvent<HTMLInputElement>) => {
-            e.preventDefault();
-            if(props.cambioTexto) {
-                props.cambioTexto(e.target.value);
-            }
-
-            if(props.expRegular) {
-                if(props.expRegular.test(e.target.value)) {
-                    fijarLbdError("");
-                }
-                else{
-                    fijarLbdError("El texto tiene caracteres no válidos");
-                }
-            }
-        }
 
         const QuitoFoco = (e: React.FocusEvent<HTMLInputElement, Element>) => {
             e.preventDefault();
@@ -178,86 +220,83 @@ const ACajaTexto = React.forwardRef<IRefACajaTexto, IPropsACajaTexto>(
             }
         }
 
-        const Icono = () => {
-            if (props.icono) {
-                return (
-                    <div
-                        className={`acajatexto-contenedor-icono ${props.classNameIcono || ""}`}
-                        style={props.estilosIcono}
-                    >
-                        {props.icono}
-                    </div>
-                );
-            }
-            else {
-                return null;
+        const cambioTexto = (e: React.ChangeEvent<HTMLInputElement>) => {
+            e.preventDefault()
+            props.cambioTexto(e.target.value)
+        }
+
+        const TeclaPresionada = (e: React.KeyboardEvent<HTMLInputElement>) => {
+            if(props.eventoTeclaPresionada){
+                props.eventoTeclaPresionada(e.key)
             }
         }
 
-        const Autocompletado = () => {
-            if(props.autoCompletado !== undefined){
-                return(
-                    <datalist id={`acajatexto-autocompletado-${uuid}`}>
+        return (
+            <div
+                className={`acajatexto ${props.classNameContenedor || ""} ${props.hasOwnProperty('visible') ? props.visible ? "no-visible" : "" : ""}`}
+                style={props.estilosContenedor}
+            >
+                {/** Titulo del ACajaTexto */}
+                {
+                    props.titulo && <TituloACajaTexto para={uuid} estilos={props.estilosTitulo} className={props.classNameTitulo}>{props.titulo}</TituloACajaTexto>
+                }
+                <div style={{ width: "100%", position: "relative", display: "flex", flexDirection: "column" }}>
+                    {/** Icono de la izquierda */}
+                    { props.iconoIzquierda && <IconoACajaTextoIzquierda estilos={props.estilosIconoIzquierda} className={props.classNameIconoIzquierda}>{props.iconoIzquierda}</IconoACajaTextoIzquierda> }
+                    {/** Input */}
+                    <input
+                        {...props}
+                        key={uuid}
+                        ref={txtRef}
+                        id={uuid}
+                        name={uuid}
+                        value={props.valor}
+                        onChange={cambioTexto}
+                        style={props.estilosACajaTexto}
+                        onBlur={QuitoFoco}
+                        className={`acajatexto-input ${props.classNameACajaTexto || ""} ${ ((props.hasOwnProperty('msjError') && props.msjError !== "") || (lbdError !== "")) ? "acajatexto-conerror" : ""} ${props.hasOwnProperty('iconoIzquierda') ? "acajatexto-icono-izquierda-visible" : ""} ${props.hasOwnProperty('iconoDerecha') ? "acajatexto-icono-derecha-visible" : ""}`}
+                        placeholder={props.placeholder}
+                        disabled={!(props.hasOwnProperty('habilitado') ? props.habilitado : true)}
+                        tabIndex={props.tabIndice}
+                        required={props.requerido}
+                        maxLength={props.maxCarateres}
+                        list={(props.autoCompletado != undefined) ? `${uuid}-autocompletadoacajatexto` : undefined}
+                        type={props.tipoEntrada || "text"}
+                        autoComplete='off'
+                        autoFocus={props.autoFoco}
+                        onKeyDown={(e) => TeclaPresionada(e)}
+                    />
+                    {/** Icono de la derecha */}
+                    {props.iconoDerecha && <IconoACajaTextoDerecha estilos={props.estilosIconoDerecha} className={props.classNameIconoDerecha}>{props.iconoDerecha}</IconoACajaTextoDerecha>}
+                </div>
+                {/** Contenedor del pie del acajatexto */}
+                {
+                    ((props.hasOwnProperty('msjError') && props.msjError !== "") || (lbdError !== "") || (props.maxCarateres && (props.hasOwnProperty('mostrarMaxCaracteres') ? props.mostrarMaxCaracteres : true))) &&
+                    <div className={"acajatexto-contenedor-pie"}>
+                        {/** Mensaje de error */}
+                        { ((props.hasOwnProperty('msjError') && props.msjError !== "") || (lbdError !== "")) && <EtiquetaErrorACajaTexto className={props.classNameError} estilos={props.estilosError} msjError={props.msjError} />}
+                        {/** Separador de cajitas de texto */}
+                        <div></div>
+                        {/** Max Caracteres */}
+                        {props.maxCarateres && (props.hasOwnProperty('mostrarMaxCaracteres') ? props.mostrarMaxCaracteres : true) && <MaxCaracteresACajaTexto caracteresActuales={props.valor.length} maxCaracteres={props.maxCarateres || 0} />}
+                    </div>
+                }
+                {/** Autocompletado lista */}
+                {
+                    (props.autoCompletado && props.autoCompletado.length > 0) &&
+                    <datalist id={`${uuid}-autocompletadoacajatexto`}>
                         {
-
-                            props.autoCompletado.map((elemento, indice) => {
+                            props.autoCompletado.map((item, indice) => {
                                 return(
-                                    <option
-                                        key={`acajatexto-autocompletado-opcion-${uuid}-${indice}`}
-                                        value={elemento}
-                                    ></option>
+                                    <option key={`${uuid}-autocompletadoacajatexto-${indice}`} value={item} />
                                 )
                             })
-
                         }
                     </datalist>
-                );
-            }
-            else{
-                return null;
-            }
-        };
-
-        if (!visible) {
-            return null;
-        }
-        else {
-            return (
-                <div
-                    className={`acajatexto ${props.className || ""}`}
-                    style={props.estilos}
-                >
-                    <TituloCajaTexto />
-                    <div
-                        className={"acajatexto-contenedor"}
-                        style={{ width: "100%" }}
-                    >
-                        <input
-                            {...props}
-                            required={props.requerido}
-                            value={props.valor}
-                            type={props.tipo || "text"}
-                            name={uuid}
-                            id={uuid}
-                            className={`acajatexto-txt ${props.classNameACajaTexto || ""} ${(props.habilitado || true) ? "" : "acajatexto-inhabilitado"}`}
-                            style={props.estilosACajaTexto}
-                            onChange={cambioTexto}
-                            autoFocus={props.autoFocus || props.autoFoco}
-                            tabIndex={props.tabIndice}
-                            disabled={!(props.habilitado || true)}
-                            onBlur={QuitoFoco}
-                            pattern={props.expRegular?.toString()}
-                            placeholder={props.placeholder}
-                            list={(props.autoCompletado !== undefined) ? `acajatexto-autocompletado-${uuid}` : undefined}
-                        />
-                        <Icono />
-                    </div>
-                    <Autocompletado />
-                    <TextoError />
-                </div>
-            );
-        }
+                }
+            </div>
+        )
     }
 )
 
-export default ACajaTexto;
+export default ACajaTexto

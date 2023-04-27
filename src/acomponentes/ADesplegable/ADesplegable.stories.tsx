@@ -1,28 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'
 import {
-    ComponentStory,
-    ComponentMeta,
-} from '@storybook/react';
-
-import ADesplegable from './index';
+    Meta
+} from '@storybook/react'
+import ADesplegable, { IDatosADesplegable } from './index'
+import { FiGithub } from "react-icons/fi";
 
 export default {
     title: "react-sgacomponentes/ADesplegable",
-    component: ADesplegable
-} as ComponentMeta<typeof ADesplegable>;
+    component: ADesplegable,
+    tags: ["autodocs"]
+} satisfies Meta<typeof ADesplegable>;
 
-const ADesplegablePlantilla: ComponentStory<typeof ADesplegable> = (args) => <ADesplegable {...args} />;
+const ADesplegablePlantilla = (args: any) => {
+
+    const [ valorActual, fijarValorActual ] = useState<string|number>(2)
+    const [ datos, fijarDatos ] = useState<Array<IDatosADesplegable>>([])
+
+    useEffect(() => {
+        const lista_opciones = new Array<IDatosADesplegable>(100).fill({ valor: 1, contenido: "" }).map((_, i) => { return { valor: i, contenido: `Opción ${i}` } })
+        fijarDatos(lista_opciones)
+    }, [])
+
+    return <ADesplegable {...args} valor={valorActual} cambioValor={fijarValorActual} datos={datos} />
+}
 
 export const ADesplegableVisualizacion = ADesplegablePlantilla.bind({});
 
 ADesplegableVisualizacion.args = {
-    titulo: 'Titulo del ADesplegable',
-    placeholder: 'Placeholder del ADesplegable',
-    valor: -1,
-    datos: new Array(100).fill(0).map((_, i) => { return {id: i, texto: `Elemento ${i}`}}),
-    estilos: { width: "300px" }
+    titulo: "Titulo del ADesplegable",
+    placeholder: "Placeholder del ADesplegable",
+    iconoIzquierda: <FiGithub size={20} />,
+    valor: 2,
+    datos: new Array<IDatosADesplegable>(100).fill({ valor: 1, contenido: "" }).map((_, i) => { return { valor: i, contenido: `Opción ${i}` } })
 }
 
 ADesplegableVisualizacion.argTypes = {
-    cambioSeleccion: { action: "cambioSeleccion" }
+    cambioValor: { action: "cambioValor" }
 }

@@ -1,4 +1,5 @@
 import React, { useId, useImperativeHandle } from 'react';
+import './../estilosgenerales.css'
 import './ASeccion.css';
 
 export interface ASeccionProps {
@@ -14,6 +15,8 @@ export interface ASeccionProps {
     classNameTitulo?: string;
     /** Estilos del titulo */
     estilosTitulo?: React.CSSProperties;
+    /** Si es falso el control de oculta */
+    visible?: boolean;
 };
 
 export interface ASeccionRef{
@@ -23,6 +26,9 @@ export interface ASeccionRef{
     Refuuid: () => string;
 };
 
+/**
+ * Componente que dibuja una seccion con un titulo
+ */
 const ASeccion = React.forwardRef<ASeccionRef, ASeccionProps>(
     function ASeccionInterno(
         props,
@@ -35,10 +41,16 @@ const ASeccion = React.forwardRef<ASeccionRef, ASeccionProps>(
             Refuuid: () => uuid
         }));
 
+        let visible = true;
+
+        if (props.visible !== undefined) {
+            visible = props.visible;
+        }
+
         return(
             <fieldset
                 id={uuid}
-                className={`aseccion ${props.className || ""}`}
+                className={`aseccion ${props.className || ""} ${!visible ? "no-visible" : ""}`}
                 style={props.estilos}
             >
                 <legend

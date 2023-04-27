@@ -1,4 +1,5 @@
-import React, { useId, useRef, useMemo, useImperativeHandle } from "react";
+import React, { useId, useRef, useImperativeHandle } from "react";
+import './../estilosgenerales.css'
 import './ACheckBox.css';
 
 export interface IPropsACheckBox {
@@ -35,8 +36,11 @@ export interface IRefACheckBox {
     foco: () => void;
 }
 
+/**
+ * Componente de checkbox
+ */
 const ACheckBox = React.forwardRef<IRefACheckBox, IPropsACheckBox>(
-    function ACheckBoxInterno (
+    function ACheckBoxInterno(
         props,
         ref
     ) {
@@ -55,12 +59,14 @@ const ACheckBox = React.forwardRef<IRefACheckBox, IPropsACheckBox>(
             focus: () => {
                 let habilitado = props.habilitado || true;
                 if (habilitado) {
+                    refACheckBox.current?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" })
                     refACheckBox.current?.focus();
                 }
             },
             foco: () => {
                 let habilitado = props.habilitado || true;
                 if (habilitado) {
+                    refACheckBox.current?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" })
                     refACheckBox.current?.focus();
                 }
             }
@@ -72,7 +78,7 @@ const ACheckBox = React.forwardRef<IRefACheckBox, IPropsACheckBox>(
             let habilitado = props.habilitado || true;
 
             if (props.cambioCheck) {
-                if(habilitado){
+                if (habilitado) {
                     props.cambioCheck(e.target.checked);
                 }
             }
@@ -89,31 +95,26 @@ const ACheckBox = React.forwardRef<IRefACheckBox, IPropsACheckBox>(
             }
         }
 
-        if (!visible) {
-            return null;
-        }
-        else {
-            return (
-                <label
-                    className={'acheckbox ' + (props.className || '') + " " + (props.hasOwnProperty('habilitado') && !props.habilitado ? 'acheckbox-inhabilitado' : '')}
-                    htmlFor={uuid}
-                    style={props.estilos}
-                >
-                    {props.texto}
-                    <input
-                        ref={refACheckBox}
-                        type="checkbox"
-                        name={uuid}
-                        id={uuid}
-                        checked={props.valor}
-                        onChange={(e) => checkBoxCambia(e)}
-                        tabIndex={props.tabIndice}
-                        onBlur={QuitoFoco}
-                    />
-                    <span className='checkmark'></span>
-                </label>
-            );
-        }
+        return (
+            <label
+                className={`acheckbox ${!visible ? "no-visible" : ""}` + (props.className || '') + " " + (props.hasOwnProperty('habilitado') && !props.habilitado ? 'acheckbox-inhabilitado' : '')}
+                htmlFor={uuid}
+                style={props.estilos}
+            >
+                {props.texto}
+                <input
+                    ref={refACheckBox}
+                    type="checkbox"
+                    name={uuid}
+                    id={uuid}
+                    checked={props.valor}
+                    onChange={(e) => checkBoxCambia(e)}
+                    tabIndex={props.tabIndice}
+                    onBlur={QuitoFoco}
+                />
+                <span className='checkmark'></span>
+            </label>
+        );
     }
 );
 

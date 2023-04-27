@@ -1,17 +1,17 @@
 import React from 'react';
 import {
-    ComponentStory,
-    ComponentMeta,
+    Meta
 } from '@storybook/react';
 
 import ABoton from './index';
 
 export default {
     title: "react-sgacomponentes/ABoton",
-    component: ABoton
-} as ComponentMeta<typeof ABoton>;
+    component: ABoton,
+    tags: ["autodocs"]
+} satisfies Meta<typeof ABoton>;
 
-const ABotonPlantilla: ComponentStory<typeof ABoton> = (args) => <ABoton {...args} />;
+const ABotonPlantilla = (args: any) => <ABoton {...args} />;
 
 export const ABotonClick = ABotonPlantilla.bind({});
 

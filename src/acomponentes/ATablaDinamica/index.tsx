@@ -1,29 +1,29 @@
-import React, { useState, useEffect, useImperativeHandle, useId } from 'react';
-import './ATablaDinamica.css';
+import React, { useState, useEffect, useImperativeHandle, useId } from 'react'
+import './ATablaDinamica.css'
 
 import {
     GenerarExcelJSON,
     TransformarATablaDinamicaAExcel
-} from './../AUtileriaComponentes/ASTD';
-import { ImprimirTablaDinamica } from './UtilidadesTablaDinamica';
-import Children from 'react-children-utilities';
+} from './../AUtileriaComponentes/ASTD'
+import { ImprimirTablaDinamica } from './UtilidadesTablaDinamica'
+import Children from 'react-children-utilities'
 
 // Componentes
-import ACajaTexto from './../ACajaTexto';
-import ABotonOpciones from './../ABotonOpciones';
-import ABoton from './../ABoton';
-import APaginador from './../APaginador';
+import ACajaTexto from './../ACajaTexto'
+import ABotonOpciones from './../ABotonOpciones'
+import ABoton from './../ABoton'
+import APaginador from './../APaginador'
 
 // Iconos
-import { FiDownload } from "react-icons/fi";
+import { FiDownload } from "react-icons/fi"
 import {
     FaRegFileExcel,
     FaPrint
-} from "react-icons/fa";
+} from "react-icons/fa"
 import {
     IoChevronUpOutline,
     IoChevronDownSharp
-} from "react-icons/io5";
+} from "react-icons/io5"
 
 export interface IEncabezadosDeOperacionesTabla {
     /** Texto que se muestra en el placeholder del ACajaTexto */
@@ -41,7 +41,7 @@ const EncabezadosDeOperacionesTabla = (props: IEncabezadosDeOperacionesTabla) =>
     return (
         <div className={"atabladinamica-operaciones"}>
             <ACajaTexto
-                className={'atabladinamica-txtfiltro'}
+                classNameContenedor={'atabladinamica-txtfiltro'}
                 classNameACajaTexto={"atabladinamica-txtfiltro"}
                 placeholder={props.placeholderFiltro}
                 valor={txt_filtroBusqueda}
@@ -105,6 +105,9 @@ export interface IRenderizarBotonesOrdenamientoProps {
     indiceOrdenado: number;
 }
 
+/**
+ * Componente que renderiza una tabla con la capacidad de ordenar sus datos y filtrarlos
+ */
 const ATablaDinamica = React.forwardRef<IATablaDinamicaRef, IATablaDinamicaProps>(
     function (
         props,
@@ -578,31 +581,26 @@ const ATablaDinamica = React.forwardRef<IATablaDinamicaRef, IATablaDinamicaProps
             );
         }
 
-        if (visible) {
-            return (
-                <div className={'atabladinamica ' + ((props.className !== undefined) ? props.className : "")}>
-                    <RenderizarTitulo />
-                    <EncabezadosDeOperacionesTabla
-                        placeholderFiltro={props.placeholderFiltro || "Filtrar..."}
-                        filtrarBusqueda={filtrarBusqueda}
-                        btnOpciones={btnOpciones_Click}
-                    />
-                    <div className={"atabladinamica-contenedor-tabla"}>
-                        <table
-                            className={"atabladinamica-tabla"}
-                            id={uuid}
-                        >
-                            <RenderizarEncabezadosTabla />
-                            <RenderizarDatosTabla />
-                        </table>
-                    </div>
-                    <RenderizarPieTabla />
+        return (
+            <div className={`atabladinamica ${!visible ? "no-visible" : ""}` + ((props.className !== undefined) ? props.className : "")}>
+                <RenderizarTitulo />
+                <EncabezadosDeOperacionesTabla
+                    placeholderFiltro={props.placeholderFiltro || "Filtrar..."}
+                    filtrarBusqueda={filtrarBusqueda}
+                    btnOpciones={btnOpciones_Click}
+                />
+                <div className={"atabladinamica-contenedor-tabla"}>
+                    <table
+                        className={"atabladinamica-tabla"}
+                        id={uuid}
+                    >
+                        <RenderizarEncabezadosTabla />
+                        <RenderizarDatosTabla />
+                    </table>
                 </div>
-            );
-        }
-        else {
-            return <></>;
-        }
+                <RenderizarPieTabla />
+            </div>
+        );
     }
 );
 

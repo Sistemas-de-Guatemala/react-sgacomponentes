@@ -1,7 +1,6 @@
 import React from 'react';
 import {
-    ComponentStory,
-    ComponentMeta,
+    Meta
 } from '@storybook/react';
 
 import ARadioBotones from './index';
@@ -9,9 +8,9 @@ import ARadioBotones from './index';
 export default {
     title: "react-sgacomponentes/ARadioBotones",
     component: ARadioBotones
-} as ComponentMeta<typeof ARadioBotones>;
+} satisfies Meta<typeof ARadioBotones>;
 
-const ARadioBotonesPlantilla: ComponentStory<typeof ARadioBotones> = (args) => <ARadioBotones {...args} />;
+const ARadioBotonesPlantilla = (args) => <ARadioBotones {...args} />;
 
 export const ARadioBotonesVisualizacion = ARadioBotonesPlantilla.bind({});
 

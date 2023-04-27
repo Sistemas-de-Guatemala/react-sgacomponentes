@@ -23,6 +23,9 @@ export interface ALogoCargaRef {
     Refuuid: () => string;
 };
 
+/**
+ * Componente de logo de carga
+ */
 const ALogoCarga = React.forwardRef<ALogoCargaRef, ALogoCargaProps>(
     function ALogoCargaInterno(
         props,

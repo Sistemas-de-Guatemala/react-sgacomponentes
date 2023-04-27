@@ -45,6 +45,9 @@ export interface IRefARadioBotones {
     Refuuid: () => string;
 }
 
+/**
+ * Componente de radio botones
+ */
 const ARadioBotones = React.forwardRef<IRefARadioBotones, IARadioBotonesProps>(
     function ARadioBotonesInterno(
         props,

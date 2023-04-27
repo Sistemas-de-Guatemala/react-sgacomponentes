@@ -90,3 +90,13 @@
     font-size: 13px;
     padding: 5px 0;
 }
+
+.atabladinamica-btn-imprimir:hover{
+    background-color: #029CFD;
+    color: white;
+}
+
+.atabladinamica-btn-excel:hover{
+    background-color: #006609;
+    color: white;
+}

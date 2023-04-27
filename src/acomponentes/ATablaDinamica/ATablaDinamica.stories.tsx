@@ -1,7 +1,6 @@
 import React from 'react';
 import {
-    ComponentStory,
-    ComponentMeta,
+    Meta
 } from '@storybook/react';
 
 import ATablaDinamica from './index';
@@ -9,9 +8,9 @@ import ATablaDinamica from './index';
 export default {
     title: "react-sgacomponentes/ATablaDinamica",
     component: ATablaDinamica
-} as ComponentMeta<typeof ATablaDinamica>;
+} satisfies Meta<typeof ATablaDinamica>;
 
-const ATablaDinamicaPlantilla: ComponentStory<typeof ATablaDinamica> = (args) => <ATablaDinamica {...args} />;
+const ATablaDinamicaPlantilla = (args) => <ATablaDinamica {...args} />;
 
 export const ATablaDinamicaVisualizacion = ATablaDinamicaPlantilla.bind({});
 

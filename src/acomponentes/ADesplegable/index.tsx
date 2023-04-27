@@ -1,635 +1,396 @@
-import React, { useId, useState, useRef, useEffect, useImperativeHandle } from 'react';
-import './ADesplegable.css';
+import React, { useId, useState, useEffect, useRef, useImperativeHandle } from 'react'
+import { FiChevronDown } from "react-icons/fi";
+import './../estilosgenerales.css'
+import './ADesplegable.css'
 
-// Componentes locales
-import ACajaTexto from './../ACajaTexto';
-import AEtiqueta from './../AEtiqueta';
-import ABoton from './../ABoton';
+import ACajaTexto, { IACajaTextoRef } from './../ACajaTexto'
+import { MdSearch } from "react-icons/md";
+import ReactChildrenUtilities from 'react-children-utilities'
 
-// Utilidades
-import { IoIosArrowDown, IoIosArrowUp, IoMdSearch } from "react-icons/io";
+interface ITituloADesplegableProps {
+    /** Clase CSS del titulo del ADesplegable */
+    className?: string
+    /** Estilos del titulo del ADesplegable */
+    estilos?: React.CSSProperties
+    /** Atributo for del titulo del ADesplegable */
+    para?: string
+    /** Contenido del titulo del TituloADesplegable */
+    children: React.ReactNode
+}
 
-export interface IADesplegableDatos {
-    /** Identificador único de la lista */
-    id: string | number;
-    /** Valor que se muestra en pantalla */
-    texto: string;
+const TituloADesplegable = (
+    props: ITituloADesplegableProps
+): JSX.Element => {
+
+    return(
+        <label
+            className={`adesplegable-titulo ${props.className}`}
+            style={props.estilos}
+            htmlFor={props.para}
+        >{props.children}</label>
+    );
+};
+
+interface IIconoADesplegableIzquierdaProps {
+    /** Clase CSS del icono */
+    className?: string
+    /** Estilos del icono */
+    estilos?: React.CSSProperties
+    /** Contenido del icono */
+    children?: React.ReactNode
+}
+
+const IconoADesplegableIzquierda = (props: IIconoADesplegableIzquierdaProps) => {
+    return(
+        <div className={`adesplegable-icono-izquierda ${props.className}`} style={props.estilos}>{props.children}</div>
+    )
+}
+
+interface IIconoADesplegableDerechaProps {
+    /** Clase CSS del icono */
+    className?: string
+    /** Estilos del icono */
+    estilos?: React.CSSProperties
+    /** Contenido del icono */
+    children?: React.ReactNode
+}
+
+const IconoADesplegableDerecha = (props: IIconoADesplegableDerechaProps) => {
+    return(
+        <div className={`adesplegable-icono-derecha ${props.className}`} style={props.estilos}>{props.children}</div>
+    )
+}
+
+interface IADesplegableContenidoDatosProps{
+    /** Datos a mostrar en pantalla del ADesplegable */
+    datos: IDatosADesplegable[]
+    /** Clase CSS del contenido del ADesplegable */
+    className?: string
+    /** Estilos del contenido del ADesplegable */
+    estilos?: React.CSSProperties
+    /** Indice del seleccionado por el usuario */
+    indiceActual: number
+    /** Valor del seleccionado por el usuario */
+    valor: string|number
+    /** Función que se ejecuta al cambiar el valor del ADesplegable */
+    cambioValor: (valor: string|number) => void
+    esVisible: boolean
+}
+
+const ADesplegableContenidoDatosProps = (props: IADesplegableContenidoDatosProps) => {
+
+    const uuid = useId()
+    const divSeleccionadoRef = useRef<HTMLDivElement>(null)
+    const [centrarDivSeleccionado, fijarCentrarDivSeleccionado] = useState<boolean>(false)
+
+    useEffect(() => {
+        if (centrarDivSeleccionado && divSeleccionadoRef.current) {
+            divSeleccionadoRef.current?.focus()
+            divSeleccionadoRef.current?.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" })
+            fijarCentrarDivSeleccionado(false)
+        }
+    }, [centrarDivSeleccionado, props.esVisible, props.indiceActual])
+
+    useEffect(() => {
+        fijarCentrarDivSeleccionado(true)
+    }, [props.indiceActual])
+
+    return(
+        <div key={uuid} id={uuid} className={`adesplegable-desplegable-contenedor-datos`} style={props.estilos}>
+            {
+                props.datos.map((elemento, indice) => {
+                    return(
+                        <div
+                            ref={props.indiceActual === indice ? divSeleccionadoRef : null}
+                            key={`${uuid}-${indice}`}
+                            id={`${uuid}-${indice}`}
+                            tabIndex={0}
+                            className={`adesplegable-datos ${props.className} ${props.indiceActual === indice ? "adesplegable-datos-indice-seleccionado" : ""}`}
+                            onClick={() => props.cambioValor(elemento.valor)}
+                        >
+                            {elemento.contenido}
+                        </div>
+                    )
+                })
+            }
+            {
+                props.datos.length === 0 && ( <div className={`adesplegable-datos ${props.className}`}>No hay datos</div> )
+            }
+        </div>
+    )
+}
+
+/**
+ * Datos a mostrar en pantalla del ADesplegable
+ */
+export interface IDatosADesplegable {
+    /** Valor del dato */
+    valor: string|number
+    /** Contenido del dato */
+    contenido: React.ReactNode|string|number
 }
 
 export interface IADesplegableProps {
-    /** Valor seleccionado */
-    valor: string | number;
-    /** Evento que se ejecuta cuando se selecciona un valor */
-    cambioSeleccion: (valor: string | number) => void;
-    /**
-     * Lista de datos del adesplegable
-     * @example
-     * <ADesplegable
-     *    valor={estadoValor}
-     *    datos={[
-     *          { id: "1", texto: "Texto 1" },
-     *          { id: "2", texto: "Texto 2" },
-     *          { id: "3", texto: "Texto 3" },
-     *    ]}
-     *    cambioSeleccion={(valor) => {
-     *         fijarEstadoValor(valor);
-     *    }}
-     * />
-     */
-    datos: Array<IADesplegableDatos>;
-    /** Clase CSS */
-    className?: string;
-    /** Estilos CSS */
-    estilos?: React.CSSProperties;
-    /** Clase CSS del titulo */
-    classNameTitulo?: string;
-    /** Estilos CSS del titulo */
-    estilosTitulo?: React.CSSProperties;
-    /** Clase CSS del error */
-    classNameError?: string;
-    /** Estilos CSS del error */
-    estilosError?: React.CSSProperties;
-    /** Clase CSS del contenido */
-    classNameContenido?: string;
-    /** Estilos CSS del contenido */
-    estilosContenido?: React.CSSProperties;
+    /** Valor del ADesplegable */
+    valor: string|number
+    /** Datos a mostrar en pantalla del ADesplegable */
+    datos: IDatosADesplegable[]
+    /** Placeholder del ADesplegable */
+    placeholder?: string
+    /** Función a ejecutar cuando cambia el valor del ADesplegable */
+    cambioValor: (valor: string|number) => void
+    /** Determina si el componente se muestra en pantalla o no */
+    visible?: boolean
+    /** Icono que se posiciona en el lado izquierdo del desplegable */
+    iconoIzquierda?: React.ReactNode
+    /** Clase CSS del Icono de la izquierda */
+    classNameIconoIzquierda?: string
+    /** Estilos del Icono de la izquierda */
+    estilosIconoIzquierda?: React.CSSProperties
+    /** Icono que se posiciona en el lado derecho del desplegable */
+    iconoDerecha?: React.ReactNode
+    /** Clase CSS del Icono de la derecha */
+    classNameIconoDerecha?: string
+    /** Estilos del Icono de la derecha */
+    estilosIconoDerecha?: React.CSSProperties
+    /** Clase CSS del ADesplegable */
+    classNameContendor?: string
+    /** Estilos del ADesplegable */
+    estilosContendor?: React.CSSProperties
     /** Titulo del ADesplegable */
-    titulo?: string;
-    /** Placeholder del AControl */
-    placeholder?: string;
-    /** Si es false el AControl se esconde */
-    visible?: boolean;
-    /** Si es true el AControl se vuelve un componente obligatorio */
-    requerido?: boolean;
-    /** Si es falso el AControl se deshabilita */
-    habilitado?: boolean;
-    /** Si es falso el filtro del AControl se oculta */
-    mostrarFiltro?: boolean;
-    /** Tab Index del AControl */
-    tabIndice?: number;
-    /** Este icono se posiciona a la derecha del AControl */
-    icono?: React.ReactNode;
-    /** Placeholder del Filtro del AControl */
-    placeholderFiltro?: string;
+    titulo?: string
+    /** Clase CSS del titulo del ACajaTexto */
+    classNameTitulo?: string
+    /** Estilos del titulo del ACajaTexto */
+    estilosTitulo?: React.CSSProperties
+    /** Indice del tab */
+    tabIndice?: number
+    /** Muestra el filtro del adesplegable o no */
+    mostrarFiltro?: boolean
 }
 
-export interface IADesplegableRef {
-    /** Tipo de AControl */
-    TipoAControl: () => string;
-    /** UUID del AControl */
-    Refuuid: () => string;
-    /** Pone un mensaje de error debajo del desplegable */
-    FijarMsjError: (error: string) => void;
-    /** Pone el foco sobre el AControl */
-    Focus: () => void;
-    /** Pone el foco sobre el AControl */
-    Foco: () => void;
-};
+export interface IADesplegableRef{
+    /** UUID del ADesplegable */
+    Refuuid: () => string
+    /** Tipo de acontrol */
+    TipoAControl: () => string
+    /** Poner el foco en el ADesplegable */
+    foco: () => void
+    /** Poner el foco en el ADesplegable */
+    focus: () => void
+}
 
-
+/**
+ * Componente ADesplegable para mostrar datos en pantalla de forma desplegable y seleccionable, con filtro de búsqueda
+ */
 const ADesplegable = React.forwardRef<IADesplegableRef, IADesplegableProps>(
-    function ADesplegableInterno(
-        props,
-        ref
-    ) {
+    function ADesplegableInterno(props, ref){
 
-        // Referencias
-        const refDivPrincipal = React.createRef<HTMLDivElement>();
-        const refDivDesplegable = React.createRef<HTMLDivElement>();
+        const uuid = useId()
+        const [ desplegableVisible, fijarDesplegableVisible ] = useState<boolean>(false)
+        const [ txtFiltro, fijarTxtFiltro ] = useState<string>("")
+        const refTxtFiltro = useRef<IACajaTextoRef>()
+        const [ indiceActual, fijarIndiceActual ] = useState<number>(0)
+        const [ datosTemp, fijarDatosTemp ] = useState<IDatosADesplegable[]>(props.datos)
+        const divContenedorRef = useRef<HTMLDivElement>(null)
+        const divSinFiltro = useRef<HTMLDivElement>(null)
 
-        // Estados de control
-        const uuid = useId();
-        const [desplegableHabierto, fijarDesplegableHabierto] = useState(false);
-        const [txt_filtroBusqueda, fijarTxt_filtroBusqueda] = useState('');
-        const [lbd_error, fijarLbd_error] = useState('');
-        // Estados de registros
-        const [datos_desplegable, fijarDatos_desplegable] = useState<Array<IADesplegableDatos>>([]);
-
-
-        // Controlar el estado del desplegable
-        useEffect(() => {
-            if (props.datos.length != datos_desplegable.length) {
-                fijarDatos_desplegable(props.datos);
-            }
-        }, [
-            props.datos
-        ]);
-
-        // Funciones de referencias
         useImperativeHandle(ref, () => ({
-            Refuuid: () => { return uuid; },
-            TipoAControl: () => { return 'ADesplegable'; },
-            FijarMsjError: (error: string) => { fijarLbd_error(error); },
-            Focus: () => {
-                let habilitado = true;
-                if (props.habilitado !== undefined) {
-                    habilitado = props.habilitado;
-                }
+            Refuuid: () => uuid,
+            TipoAControl: () => 'ADesplegable',
+            foco: () => PonerFoco(),
+            focus: () => PonerFoco()
+        }))
 
-                if (habilitado) {
-                    refDivDesplegable.current?.focus();
-                }
-            },
-            Foco: () => {
-                let habilitado = true;
-                if (props.habilitado !== undefined) {
-                    habilitado = props.habilitado;
-                }
+        useEffect(() => {
+            fijarIndiceActual(datosTemp.findIndex(dato => dato.valor === props.valor))
+        }, [props.valor, datosTemp])
 
-                if (habilitado) {
-                    refDivDesplegable.current?.focus();
-                }
+        useEffect(() => {
+            fijarDatosTemp(props.datos)
+        }, [props.datos])
+
+        useEffect(() => {
+            if(txtFiltro.length > 0){
+                const datosActuales = datosTemp.filter(dato => ReactChildrenUtilities.onlyText(dato.contenido).toString().toLowerCase().includes(txtFiltro.toLowerCase()))
+                fijarDatosTemp(datosActuales)
+            }else{
+                fijarDatosTemp(props.datos)
             }
-        }));
+        }, [txtFiltro])
 
+        useEffect(() => {
+            if(!desplegableVisible){
+                PonerFoco()
+            }
+        }, [desplegableVisible])
 
-        let visible = true;
-
-        if (props.visible !== undefined) {
-            visible = props.visible;
+        const PonerFoco = (): void => {
+            divContenedorRef?.current?.focus()
         }
 
-        /**
-         * Titulo que se mostrara en el componente
-         * @returns {React.Component}
-         */
-        const TituloADesplegable = () => {
-            if (props.hasOwnProperty('titulo')) {
-                return (
-                    <AEtiqueta
-                        para={uuid}
-                        className={"adesplegable-titulo " + (props.hasOwnProperty('classNameTitulo') ? props.classNameTitulo : "")}
-                        estilos={props.hasOwnProperty('estilosTitulo') ? props.estilosTitulo : {}}
-                    >
-                        {props.titulo}
-                    </AEtiqueta>
-                );
+        const RenderizarTextoADesplegable = (valorActual: string|number): string | React.ReactElement | React.ReactNode | number => {
+            const datos = props.datos.filter(dato => dato.valor === valorActual)
+            if(datos.length > 0){
+                return datos[0].contenido
             }
-            else {
-                return (
-                    <>
-                    </>
-                );
+            
+            if(props.placeholder){
+                return <label style={{ color: "#CCCCCC", width: "100%" }}>{props.placeholder}</label>
             }
+
+            return ""
         }
 
-
-
-        const _clickDesplegable = () => {
-            let estaHabilitado:boolean = true;
-            if (props.habilitado !== undefined) {
-                estaHabilitado = props.habilitado;
-            }
-
-            if (estaHabilitado) {
-                fijarDesplegableHabierto(!desplegableHabierto);
-                fijarTxt_filtroBusqueda("");
-            }
-        }
-
-        const _clickCancelar = () => {
-            fijarDesplegableHabierto(false);
-            fijarTxt_filtroBusqueda("");
-            fijarDatos_desplegable(props.datos);
-        }
-
-        /**
-         * Evento que se ejecuta cuando presionan una tecla
-         * // Evento que puede ser de utilidad en algún futuro React.KeyboardEvent<HTMLDivElement>
-         * @param e Evento
-         */
-        const _TeclaPresionadaFocoADesplegable = (e: any) => {
-            if (
-                (e.key === "Enter") ||
-                (e.key === " ")
-            ) {
-                _clickDesplegable();
-            }
-            if (e.shiftKey && (e.keyCode === 9)) {
-                _clickCancelar();
-                try {
-                    e.target.previousSibling.focus();
-                } catch (err) {
-
+        const DetectarFlechasPresionadasFiltro = (tecla: string): void => {
+            if(tecla === "ArrowDown"){
+                if(indiceActual < datosTemp.length - 1){
+                    fijarIndiceActual(indiceActual + 1)
+                    setTimeout(() => {
+                        refTxtFiltro?.current?.focus()
+                    }, 10)
                 }
             }
-            else
-                if (e.key === "Tab") {
-                    _clickCancelar();
-                    try {
-                        e.target.nextSibling.focus();
-                    } catch (err) {
 
-                    }
+            if(tecla === "ArrowUp"){
+                if(indiceActual > 0){
+                    fijarIndiceActual(indiceActual - 1)
+                    setTimeout(() => {
+                        refTxtFiltro?.current?.focus()
+                    }, 10)
                 }
-        };
-
-
-        const _obtenerTextoSeleccionado = (id_valor_seleccionado: string | number): string => {
-            let valorFinalCadena: string = "";
-            let valorFinalNumero: number = -1;
-
-            if (typeof props.valor === "string") {
-                valorFinalCadena = props.valor;
             }
 
-            if (typeof props.valor === "number") {
-                valorFinalNumero = props.valor;
-            }
-
-            if ((valorFinalCadena !== "") || (valorFinalNumero !== -1)) {
-                let texto_seleccionado = "";
-                props.datos.forEach(element => {
-                    if (element.id == id_valor_seleccionado) {
-                        texto_seleccionado = element.texto.toString();
-                    }
-                });
-                return ((texto_seleccionado === "") ? props.placeholder || "" : texto_seleccionado);
-            }
-            else {
-                return props.placeholder || "";
+            if(tecla === "Enter"){
+                props.cambioValor(datosTemp[indiceActual].valor)
+                fijarDesplegableVisible(false)
+                fijarDatosTemp(props.datos)
+                fijarTxtFiltro("")
             }
         }
 
-        const ADesplegableRender = () => {
-            return (
-                <>
-                    <div
-                        className={"adesplegable-contenido " + (props.hasOwnProperty('classNameContenido') ? props.classNameContenido + " " : "")}
-                        style={props.hasOwnProperty('estilosContenido') ? props.estilosContenido : {}}
-                        onClick={(e) => { e.preventDefault(); _clickDesplegable(); }}
-                        tabIndex={props.tabIndice || 0}
-                        onKeyDown={_TeclaPresionadaFocoADesplegable}
-                        ref={refDivDesplegable}
-                    >
-                        <div className={"adesplegable-texto " + (props.hasOwnProperty('habilitado') ? (!props.habilitado ? "adesplegable-contenido-deshabilitado " : " ") : " ")}>
-                            <AEtiqueta className={"adesplegable-texto-seleccionado " + (props.hasOwnProperty('habilitado') ? (!props.habilitado ? "adesplegable-contenido-deshabilitado-texto " : " ") : " ")}>
-                                {_obtenerTextoSeleccionado(props.valor)}
-                            </AEtiqueta>
-                            {(
-                                props.hasOwnProperty('icono') &&
-                                props.icono
-                            )}
-                            {(
-                                !props.hasOwnProperty('icono') &&
-                                    (desplegableHabierto) ? <IoIosArrowUp size={20} /> : <IoIosArrowDown size={20} />
-                            )}
-                        </div>
-
-                    </div>
-                    {(
-                        desplegableHabierto &&
-                        <ADesplegableOpciones />
-                    )}
-                </>
-            );
-        }
-
-
-        const _clickElementoSeleccionado = (id: string | number): void => {
-            fijarDesplegableHabierto(false);
-            fijarTxt_filtroBusqueda("");
-            fijarDatos_desplegable(props.datos);
-            props.cambioSeleccion(id);
-        }
-
-        const _filtrarBusqueda = (txt: string): void => {
-            txt = txt.trimStart();
-            fijarTxt_filtroBusqueda(txt);
-
-            if (txt !== "") {
-                let datos_filtrados = props.datos.filter(element => {
-                    return (element.texto.toLowerCase().includes(txt.toLowerCase()));
-                });
-                fijarDatos_desplegable(datos_filtrados);
-            }
-            else {
-                fijarDatos_desplegable(props.datos);
-            }
-        }
-
-
-        const ADesplegableOpciones = () => {
-
-            let elemento_seleccionado = useRef<HTMLDivElement>(null);
-            let contenedor_elementos = useRef<HTMLDivElement>(null);
-            let contenedorPrincipal = useRef<HTMLDivElement>(null);
-
-            const [indiceSeleccionado, fijarIndiceSeleccionado] = useState(0);
-
-            let muestraFiltro = true;
-            if (props.mostrarFiltro !== undefined) {
-                muestraFiltro = props.mostrarFiltro;
-            }
-
-            let busquedaPorTecla = "";
-
-            useEffect(() => {
-                if (contenedor_elementos.current && elemento_seleccionado.current) {
-                    contenedor_elementos.current.scrollTop = elemento_seleccionado.current.offsetTop - 100;
-                }
-
-                for (let i = 0; i < datos_desplegable.length; i++) {
-                    if (datos_desplegable[i].id == props.valor) {
-                        fijarIndiceSeleccionado(() => { return i; });
-                    }
-                }
-
-                contenedorPrincipal.current?.focus();
-
-            }, [muestraFiltro, elemento_seleccionado, contenedor_elementos]);
-
-            const MoverScrollPosicionTeclas = () => {
-                const elementos_encontrados = document.getElementById("adesplegable-opcion-elemento-" + uuid + "-" + indiceSeleccionado);
-                if (elementos_encontrados) {
-                    if (contenedor_elementos.current) {
-                        contenedor_elementos.current.scrollTop = elementos_encontrados.offsetTop - 100;
-                    }
-                }
-            }
-
-            const MoverScrollPosicionFocus = () => {
-                const elementos_encontrados = document.getElementsByClassName("adesplegable-opcion-elemento-" + uuid);
-                if (elementos_encontrados) {
-                    for (let i = 0; i < elementos_encontrados.length; i++) {
-                        if (elementos_encontrados[i].textContent?.toLowerCase().includes(busquedaPorTecla.toLowerCase())) {
-
-                            if (contenedor_elementos.current) {
-                                contenedor_elementos.current.scrollTop = elementos_encontrados[i].scrollTop;
-                            }
-
-                            setTimeout(() => {
-                                fijarIndiceSeleccionado(() => { return i; });
-                            }, 100);
-
-                            setTimeout(() => {
-                                busquedaPorTecla = "";
-                            }, 2000);
-                            break;
+        
+        const AbrirDesplegable = (): void => {
+            fijarDesplegableVisible(!desplegableVisible)
+            if(!desplegableVisible){
+                setTimeout(() => {
+                    if(props.hasOwnProperty('mostrarFiltro')){
+                        if(props.mostrarFiltro){
+                            refTxtFiltro?.current?.focus()
+                        }else{
+                            divSinFiltro?.current?.focus()
                         }
                     }
-                }
-            }
-
-            const _TeclaPresionada = (e: any) => {
-                e.preventDefault();
-                if (!muestraFiltro || muestraFiltro) {
-                    if (e.shiftKey && (e.keyCode === 9)) {
-                        try {
-                            e.target.previousSibling.focus();
-                        } catch (err) {
-
-                        }
+                    else{
+                        refTxtFiltro?.current?.focus()
                     }
-                    else
-                        if (e.key === "Tab") {
-                            try {
-                                e.target.nextSibling.focus();
-                            } catch (err) {
+                }, 10)
+            }
+        }
 
-                            }
-                        }
-                        else
-                            if (
-                                (e.key === "Escape")
-                            ) {
-                                _clickCancelar();
-                            }
-                            else
-                                if (e.key === "Enter") {
-                                    _clickElementoSeleccionado(datos_desplegable[indiceSeleccionado].id);
-                                }
-                                else
-                                    if (
-                                        (e.key !== "ArrowUp") &&
-                                        (e.key !== "ArrowDown") &&
-                                        (e.key !== "ArrowLeft") &&
-                                        (e.key !== "ArrowRight") &&
-                                        (e.key !== "Tab") &&
-                                        (e.key !== "Control")
-                                    ) {
-                                        busquedaPorTecla += e.key;
-                                        MoverScrollPosicionFocus();
-                                    }
-                                    else {
-                                        switch (e.key) {
-                                            case "ArrowUp": {
-                                                if (indiceSeleccionado > 0) {
-                                                    fijarIndiceSeleccionado((indiceActual) => { return indiceActual - 1; });
-                                                    MoverScrollPosicionTeclas();
-                                                }
-                                                break;
-                                            }
-                                            case "ArrowDown": {
-                                                if (indiceSeleccionado < datos_desplegable.length - 1) {
-                                                    fijarIndiceSeleccionado((indiceActual) => { return indiceActual + 1; });
-                                                    MoverScrollPosicionTeclas();
-                                                }
-                                                break;
-                                            }
-                                            default: {
-                                                break;
-                                            }
-                                        }
-                                    }
+        const EventoOpcionSeleccionada = (valor: string | number) => {
+            fijarTxtFiltro("")
+            props.cambioValor(valor)
+            fijarDesplegableVisible(!desplegableVisible)
+        }
+
+        const EventoTeclaPresionadaDiv = (tecla: string): void => {
+            if(tecla === "Enter"){
+                AbrirDesplegable()
+            }
+            if(tecla === " "){
+                AbrirDesplegable()
+            }
+        }
+
+        const TeclaPresionadaSinFiltro = (tecla: string): void => {
+            if(tecla === "ArrowDown"){
+                if(indiceActual < datosTemp.length - 1){
+                    fijarIndiceActual(indiceActual + 1)
+                    setTimeout(() => {
+                        divSinFiltro?.current?.focus()
+                    }, 10)
                 }
-                else {
-                    if (
-                        (e.key === "Escape")
-                    ) {
-                        _clickCancelar();
-                    }
+            }
+
+            if(tecla === "ArrowUp"){
+                if(indiceActual > 0){
+                    fijarIndiceActual(indiceActual - 1)
+                    setTimeout(() => {
+                        divSinFiltro?.current?.focus()
+                    }, 10)
                 }
-            };
-
-            if (muestraFiltro) {
-                return (
-                    <div
-                        ref={contenedorPrincipal}
-                        className={"adesplegable-opciones "}
-                    >
-                        <div className={"adesplegable-opciones-contenedor"}>
-                            {(
-                                muestraFiltro &&
-                                <div className={"adesplegable-opciones-filtro"}>
-                                    <ACajaTexto
-                                        placeholder={(props.hasOwnProperty('placeholderFiltro')) ? props.placeholderFiltro : "Buscar..."}
-                                        estilos={{
-                                            margin: "0"
-                                        }}
-                                        estilosACajaTexto={{
-                                            border: "none",
-                                            width: "100%"
-                                        }}
-                                        tabIndice={0}
-                                        className={"adesplegable-acajatexto-filtro-busqueda"}
-                                        autoFocus={true}
-                                        valor={txt_filtroBusqueda}
-                                        cambioTexto={(e) => { _filtrarBusqueda(e); }}
-                                    />
-                                    <IoMdSearch size={25} />
-                                    <ABoton
-                                        estilos={{
-                                            textAlign: "center",
-                                            justifyContent: "center",
-                                            alignItems: "center",
-                                            width: "20%"
-                                        }}
-                                        tipoBotonColor="link"
-                                        tipoBoton="button"
-                                        botonPresionado={() => { _clickCancelar(); }}
-                                        className={"adesplegable-btn-cancelar"}
-                                    >
-                                        Cancelar
-                                    </ABoton>
-                                </div>
-                            )}
-                            <div
-                                ref={contenedor_elementos}
-                                className={"adesplegable-opciones-elementos adesplegable-opciones-elementos-" + uuid}
-                                tabIndex={0}
-                                onKeyDown={_TeclaPresionada}
-                            >
-                                {
-                                    datos_desplegable.map((item, indice) => {
-                                        if (typeof props.valor !== typeof item.id) {
-                                            throw Error(`La propiedad valor es de tipo ${typeof props.valor} y el elemento ${item.id} es de tipo ${typeof item.id}`);
-                                        }
-                                        else {
-                                            if (props.valor === item.id) {
-                                                return (
-                                                    <div
-                                                        onClick={(e) => { e.preventDefault(); _clickElementoSeleccionado(item.id); }}
-                                                        ref={elemento_seleccionado}
-                                                        key={"adesplegable-opcion-elemento-" + uuid + "-" + indice}
-                                                        id={"adesplegable-opcion-elemento-" + uuid + "-" + indice}
-                                                        className={"adesplegable-opciones-elemento adesplegable-item-seleccionado adesplegable-opcion-elemento-" + uuid}
-                                                    >
-                                                        <AEtiqueta className={"adesplegable-opciones-elemento-texto adesplegable-item-seleccionado-texto"}>
-                                                            {item.texto}
-                                                        </AEtiqueta>
-                                                    </div>
-                                                )
-                                            }
-                                            else {
-                                                return (
-                                                    <div
-                                                        onClick={(e) => { e.preventDefault(); _clickElementoSeleccionado(item.id); }}
-                                                        key={"adesplegable-opcion-elemento-" + uuid + "-" + indice}
-                                                        id={"adesplegable-opcion-elemento-" + uuid + "-" + indice}
-                                                        className={`adesplegable-opciones-elemento ${(indice === indiceSeleccionado) ? "adesplegable-item-seleccionado" : ""} adesplegable-opcion-elemento-` + uuid}
-                                                    >
-                                                        <AEtiqueta className={"adesplegable-opciones-elemento-texto"}>
-                                                            {item.texto}
-                                                        </AEtiqueta>
-                                                    </div>
-                                                )
-                                            }
-                                        }
-                                    })
-                                }
-                            </div>
-                        </div>
-                    </div>
-                );
             }
-            else {
-                return (
-                    <div
-                        ref={contenedorPrincipal}
-                        tabIndex={0}
-                        onKeyDown={_TeclaPresionada}
-                        className={"adesplegable-opciones "}
-                    >
-                        <div className={"adesplegable-opciones-contenedor"}>
-                            <div
-                                ref={contenedor_elementos}
-                                className={"adesplegable-opciones-elementos adesplegable-opciones-elementos-" + uuid}
-                            >
-                                {
-                                    datos_desplegable.map((item, indice) => {
-                                        if (typeof props.valor !== typeof item.id) {
-                                            throw Error(`La propiedad valor es de tipo ${typeof props.valor} y el elemento ${item.id} es de tipo ${typeof item.id}`);
-                                        }
-                                        else {
-                                            if (props.valor === item.id) {
-                                                return (
-                                                    <div
-                                                        onClick={(e) => { e.preventDefault(); _clickElementoSeleccionado(item.id); }}
-                                                        ref={elemento_seleccionado}
-                                                        key={"adesplegable-opcion-elemento-" + uuid + "-" + indice}
-                                                        id={"adesplegable-opcion-elemento-" + uuid + "-" + indice}
-                                                        className={"adesplegable-opciones-elemento adesplegable-item-seleccionado adesplegable-opcion-elemento-" + uuid}
-                                                    >
-                                                        <AEtiqueta className={"adesplegable-opciones-elemento-texto adesplegable-item-seleccionado-texto"}>
-                                                            {item.texto}
-                                                        </AEtiqueta>
-                                                    </div>
-                                                )
-                                            }
-                                            else {
-                                                return (
-                                                    <div
-                                                        onClick={(e) => { e.preventDefault(); _clickElementoSeleccionado(item.id); }}
-                                                        key={"adesplegable-opcion-elemento-" + uuid + "-" + indice}
-                                                        id={"adesplegable-opcion-elemento-" + uuid + "-" + indice}
-                                                        className={`adesplegable-opciones-elemento ${(indice === indiceSeleccionado) ? "adesplegable-item-seleccionado" : ""} adesplegable-opcion-elemento-` + uuid}
-                                                    >
-                                                        <AEtiqueta className={"adesplegable-opciones-elemento-texto"}>
-                                                            {item.texto}
-                                                        </AEtiqueta>
-                                                    </div>
-                                                )
-                                            }
-                                        }
-                                    })
-                                }
-                            </div>
-                        </div>
-                    </div>
-                );
+
+            if(tecla === "Enter"){
+                props.cambioValor(datosTemp[indiceActual].valor)
+                fijarDesplegableVisible(false)
+                fijarDatosTemp(props.datos)
+                fijarTxtFiltro("")
             }
         }
 
-
-        /**
-         * Muestra un texto de error debajo del componente
-         * @returns {React.Component}
-         */
-        const TextoError = () => {
-            if (lbd_error === "") {
-                return <></>;
-            }
-            else {
-                return (
-                    <AEtiqueta
-                        className={"adesplegable-error " + (props.hasOwnProperty('classNameError') ? props.classNameError : "")}
-                        estilos={(props.hasOwnProperty('estilosError') ? props.estilosError : {})}
-                    >
-                        {lbd_error}
-                    </AEtiqueta>
-                );
-            }
-        }
-
-
-        if (!visible) {
-            return <></>;
-        }
-        else {
-            return (
+        return(
+            <div
+                key={uuid}
+                className={`adesplegable ${props.classNameContendor} ${props.hasOwnProperty('visible') ? props.visible ? "" : "no-visible" : ""}`}
+                style={props.estilosContendor}
+            >
+                {/** Titulo del adesplegable */}
+                { props.titulo && <TituloADesplegable className={props.classNameTitulo} estilos={props.estilosTitulo} para={uuid}>{props.titulo}</TituloADesplegable> }
                 <div
-                    ref={refDivPrincipal}
-                    className={"adesplegable " + (props.hasOwnProperty('className') ? props.className : '')}
-                    style={props.hasOwnProperty('estilos') ? props.estilos : {}}
+                    ref={divContenedorRef}
+                    className={`adesplegable-contenedor`}
+                    tabIndex={props.tabIndice || 0}
+                    id={`adesplegable-contenedor-${uuid}`}
+                    onClick={AbrirDesplegable}
+                    onKeyDown={(e) => EventoTeclaPresionadaDiv(e.key)}
                 >
-                    <TituloADesplegable />
-                    <ADesplegableRender />
-                    <TextoError />
+                    {/** Icono de la izquierda */}
+                    { props.iconoIzquierda && <IconoADesplegableIzquierda className={props.classNameIconoIzquierda} estilos={props.estilosIconoIzquierda}>{props.iconoIzquierda}</IconoADesplegableIzquierda> }
+                    {/** Desplegable */}
+                    <div className={`adesplegable-contenedor-contenido`}>
+                        <div style={{ width: "100%", whiteSpace: "nowrap", textOverflow: "ellipsis", overflow: "hidden" }}>
+                            {RenderizarTextoADesplegable(props.valor)}
+                        </div>
+                    </div>
+                    {/** Icono de la derecha */}
+                    { props.iconoDerecha && <IconoADesplegableDerecha className={props.classNameIconoDerecha} estilos={props.estilosIconoDerecha}>{props.iconoDerecha}</IconoADesplegableDerecha> }
+                    { !props.iconoDerecha && <FiChevronDown size={25} /> }
                 </div>
-            );
-        }
+                <div
+                    ref={divSinFiltro}
+                    id={`adesplegable-desplegable-${uuid}`}
+                    className={`adesplegable-desplegable ${desplegableVisible ? "adesplegable-desplegable-visible" : ""}`}
+                    tabIndex={props.hasOwnProperty('mostrarFiltro') ? props.mostrarFiltro ? undefined : 0 : undefined}
+                    onKeyDown={(e) => TeclaPresionadaSinFiltro(e.key)}
+                >
+                    { props.hasOwnProperty('mostrarFiltro') ? props.mostrarFiltro ? 
+                        <ACajaTexto
+                            // @ts-ignore
+                            ref={refTxtFiltro}
+                            valor={txtFiltro}
+                            cambioTexto={(e) => fijarTxtFiltro(e)}
+                            iconoDerecha={<MdSearch size={25} />}
+                            placeholder={'Filtrar opciones'}
+                            eventoTeclaPresionada={DetectarFlechasPresionadasFiltro}
+                        />
+                            : null :
+                            <ACajaTexto
+                                // @ts-ignore
+                                ref={refTxtFiltro}
+                                valor={txtFiltro}
+                                cambioTexto={(e) => fijarTxtFiltro(e)}
+                                iconoDerecha={<MdSearch size={25} />}
+                                placeholder={'Filtrar opciones'}
+                                eventoTeclaPresionada={DetectarFlechasPresionadasFiltro}
+                            /> }
+                    {/** Desplegable */}
+                    <ADesplegableContenidoDatosProps datos={datosTemp} indiceActual={indiceActual} valor={props.valor} cambioValor={(e) => EventoOpcionSeleccionada(e)} esVisible={desplegableVisible} />
+                </div>
+            </div>
+        )
     }
-);
+)
 
-export default ADesplegable;
+export default ADesplegable

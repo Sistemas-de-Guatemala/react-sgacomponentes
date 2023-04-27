@@ -17,6 +17,9 @@ export interface IAPanelPestanaRef {
     Refuuid: () => string;
 }
 
+/**
+ * Pestaña del APanelPestanas
+ */
 const APanelPestana = React.forwardRef<IAPanelPestanaRef, IAPanelPestanaProps>(
     function APanelPestanaInterno(
         props,
@@ -49,7 +52,7 @@ const APanelPestana = React.forwardRef<IAPanelPestanaRef, IAPanelPestanaProps>(
 
 export interface IAPanelPestanasProps {
     /** Paneles */
-    children: React.ReactNode;
+    children: React.ReactElement<typeof APanelPestana>[];
     /** Clase del panel */
     className?: string;
     /** Estilos del Panel */
@@ -79,6 +82,9 @@ export interface IAPanelPestanasRef {
     Refuuid: () => string;
 }
 
+/**
+ * Contenedor de APestañas
+ */
 const APanelPestanas = React.forwardRef<IAPanelPestanasRef, IAPanelPestanasProps>(
     function APanelPestanasInterior(
         props,

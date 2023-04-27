@@ -26,15 +26,15 @@ yarn add react-sdgacomponentes
 ## Comandos de uso
   Este comando empaqueta el proyecto
   ```bash
-  yarn compilar-prod
+  yarn compilar
   ```
   Este comando abre la documentación para una previsualización
   ```bash
-  yarn storybook
+  yarn des
   ```
   Este comando empaqueta la documentación para subir a un sitio
   ```bash
-  yarn build-storybook
+  yarn doc
   ```
 
 ## Uso
@@ -49,52 +49,27 @@ const App = () => (
 );
 ```
 
-## Lista de componentes actualmente
-| Componente                                                  | Descripción                                                             |
-| -- | -- |
-| ABoton                                                      | Componente de botón                                                     |
-| ABotonOpciones                                              | Componente de botón con opciones                                        |
-| AEtiqueta                                                   | Componente de etiqueta                                                  |
-| ACajaTexto                                                  | Componente de caja de texto                                             |
-| ACheckBox                                                   | Componente de checkbox                                                  |
-| ADesplegable                                                | Componente de desplegable con buscador                                  |
-| APaginador                                                  | Componente de paginador                                                 |
-| APanel                                                      | Componente que levanta un modal                                         |
-| APanelPestanas                                              | Componente contenedor de pestañas                                       |
-| APanelPestana                                               | Componente de pestaña (Va dentro del contenedor de pestañas)            |
-| ARadioBotones                                               | Componente de radio botones                                             |
-| ASeccion                                                    | Componente que agrupa campos dibujando un borde y un titulo             |
-| ATablaDinamica                                              | Componente de tabla dinamica                                            |
-| ATabla                                                      | Componente de tabla simple sin tanto filtro                             |
-| ATitulosPantallas                                           | Componente de titulos de pantallas                                      |
+## Dependencias del proyecto
 
-## Lista de utilidades actualmente
-
- - GenerarExcelJSON: Genera un archivo excel con una estructura JSON
- - ArrayExcelAArrayObjetos: Convierte un array de excel a un array de objetos
- - TransformarATablaDinamicaAExcel : Convierte una tabla dinamica a una tabla excel
- - ImprimirObjetoHTML: Imprime un objeto en formato HTML
-
-## Paquetes para desarrollo de la librería
-
-| Paquete                                                                                               | Descripción                                                                               |
-| -- | -- |
-| [react](https://es.reactjs.org)                                                                       | React                                                                                     |
-| [react-dom](https://es.reactjs.org/docs/dom-elements.html)                                            | React DOM                                                                                 |
-| [typescript](https://www.typescriptlang.org/)                                                         | TypeScript                                                                                |
-| [storybook](https://storybook.js.org/)                                                                | Storybook -> Documenta los componentes visualmente                                        |
-| [rollup](https://rollupjs.org/)                                                                       | Rollup -> Compila los componentes                                                         |
-| [rollup-plugin-typescript2](https://www.npmjs.com/package/rollup-plugin-typescript2)                  | Rollup-plugin-typescript2 -> Compila los componentes con TypeScript                       |
-| [@rollup/plugin-commonjs](https://www.npmjs.com/package/@rollup/plugin-commonjs)                      | @rollup/plugin-commonjs -> Compila los componentes con CommonJS                           |
-| [@rollup/plugin-node-resolve](https://www.npmjs.com/package/@rollup/plugin-node-resolve)              | @rollup/plugin-node-resolve -> Resuelve los imports de los componentes con NodeJS         |
-| [rollup-plugin-peer-deps-external](https://www.npmjs.com/package/rollup-plugin-peer-deps-external)    | Rollup-plugin-peer-deps-external -> Resuelve los imports de los componentes con NodeJS    |
-| [rollup-plugin-postcss](https://www.npmjs.com/package/rollup-plugin-postcss)                          | Rollup-plugin-postcss -> Compila los componentes con PostCSS                              |
-| [postcss](https://www.npmjs.com/package/postcss)                                                      | PostCSS                                                                                   |
-| [react-paginator](https://www.npmjs.com/package/react-paginator)                                      | React-paginator -> Paginador                                                              |
-| [react-icons](https://www.npmjs.com/package/react-icons)                                              | Iconos                                                                                    |
-| [xlsx](https://www.npmjs.com/package/xlsx)                                                            | Librería para la lectura de archivos excel                                                |
-| [file-saver](https://www.npmjs.com/package/file-saver)                                                | Librería para la exportación de archivos                                                  |
-| [@types/file-saver](https://www.npmjs.com/package/@types/file-saver)                                  | @types/file-saver -> Tipos de file-saver                                                  |
-| [react-children-utilities](https://www.npmjs.com/package/react-children-utilities)                    | React-children-utilities -> Utilidades para los hijos de react                            |
-| [rollup-plugin-terser](https://www.npmjs.com/package/rollup-plugin-terser)                            | Sirve para hacer un minificado del código (ver archivo rollup.config.js)                  |
-| [@storybook/cli](https://www.npmjs.com/package/@storybook/cli)                                        | Sirve para ejecutar storybook                                                             |
+| Dependencia                                                 | Link Documentación                                                                  | Propósito                                                                                               | Tipo dependencia          |
+|:----|:----|:----|:----|
+| react                                                       | https://es.reactjs.org/docs/getting-started.html                                    | Biblioteca de componentes para construir interfaces                                                     | Dependencia compartida    |
+| react-dom                                                   | https://es.reactjs.org/docs/react-dom.html                                          | Renderiza componentes React en un navegador                                                             | Dependencia compartida    |
+| prop-types                                                  | https://www.npmjs.com/package/prop-types                                            | Validación de props para componentes React                                                              | Producción                |
+| typescript                                                  | https://www.typescriptlang.org/docs/                                                | Lenguaje de programación tipado                                                                         | Desarrollo                |
+| @babel/core                                                 | https://babeljs.io/docs/en/babel-core                                               | Transpilador de código JavaScript                                                                       | Desarrollo                |
+| @babel/preset-env                                           | https://babeljs.io/docs/en/babel-preset-env                                         | Configuración de Babel para la última versión de JS                                                     | Desarrollo                |
+| @babel/preset-react                                         | https://babeljs.io/docs/en/babel-preset-react                                       | Configuración de Babel para React                                                                       | Desarrollo                |
+| @babel/preset-typescript                                    | https://babeljs.io/docs/en/babel-preset-typescript                                  | Configuración de Babel para TypeScript                                                                  | Desarrollo                |
+| rollup                                                      | https://rollupjs.org/guide/en/                                                      | Empaquetador de módulos JavaScript                                                                      | Desarrollo                |
+| @rollup/plugin-commonjs                                     | https://github.com/rollup/plugins/tree/master/packages/commonjs                     | Convertidor de módulos CommonJS a ES6                                                                   | Desarrollo                |
+| @rollup/plugin-node-resolve                                 | https://github.com/rollup/plugins/tree/master/packages/node-resolve                 | Resuelve módulos npm en Rollup                                                                          | Desarrollo                |
+| @rollup/plugin-typescript                                   | https://github.com/rollup/plugins/tree/master/packages/typescript                   | Compila TypeScript con Rollup                                                                           | Desarrollo                |
+| @storybook/addon-essentials                                 | https://storybook.js.org/docs/react/essentials/introduction                         | Addon para Storybook que incluye varios addons esenciales                                               | Desarrollo                |
+| @storybook/addon-interactions                               | https://storybook.js.org/docs/react/essentials/actions                              | Addon para Storybook que permite crear interacciones con componentes                                    | Desarrollo                |
+| @storybook/addon-links                                      | https://storybook.js.org/docs/react/essentials/navigation                           | Addon para Storybook que permite crear links entre componentes                                          | Desarrollo                |
+| @storybook/blocks                                           | https://storybook.js.org/docs/react/api/blocks                                      | Componentes predefinidos para Storybook                                                                 | Desarrollo                |
+| @storybook/react                                            | https://storybook.js.org/docs/react/get-started/introduction                        | Herramienta de desarrollo para componentes React                                                        | Desarrollo                |
+| @storybook/react-webpack5                                   | https://storybook.js.org/docs/react/configure/webpack5                              | Configuración para usar Webpack 5 con Storybook                                                         | Desarrollo                |
+| @storybook/testing-library                                  | https://www.npmjs.com/package/@storybook/testing-library                            | Utilidades de testing para componentes Storybook                                                        | Desarrollo                |
+| @types/react                                                | https://www.npmjs.com/package/@types/react                                          | Tipos de TypeScript para React                                                                          | Desarrollo                |

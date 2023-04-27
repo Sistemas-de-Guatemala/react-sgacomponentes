@@ -33,6 +33,9 @@ export interface IATablaRef {
     Refuuid: () => string;
 };
 
+/**
+ * Componente de tabla con un diseño preestablecido
+ */
 const ATabla = React.forwardRef<IATablaRef, IATablaProps>(
     function ATablaInterno(
         props,

@@ -1,18 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
-    ComponentStory,
-    ComponentMeta,
+    Meta
 } from '@storybook/react';
 
 import ACajaTexto from './index';
-import { FiAward } from "react-icons/fi";
+import { FiGithub } from "react-icons/fi";
 
 export default {
     title: "react-sgacomponentes/ACajaTexto",
-    component: ACajaTexto
-} as ComponentMeta<typeof ACajaTexto>;
+    component: ACajaTexto,
+    tags: ["autodocs"]
+} satisfies Meta<typeof ACajaTexto>;
 
-const ACajaTextoPlantilla: ComponentStory<typeof ACajaTexto> = (args) => <ACajaTexto {...args} />;
+const ACajaTextoPlantilla = (args: any) => {
+
+    const [valorActual, fijarValorActual] = useState<string>("");
+
+    return <ACajaTexto {...args} valor={valorActual} cambioTexto={fijarValorActual} />
+}
 
 export const ACajaTextoVisualizacion = ACajaTextoPlantilla.bind({});
 
@@ -24,7 +29,7 @@ for(let i = 0; i < 101; i++){
 ACajaTextoVisualizacion.args = {
     titulo: "Titulo del ACajaTexto",
     placehodler: "Placeholder del ACajaTexto",
-    icono: <FiAward size={20} />,
+    iconoIzquierda: <FiGithub size={20} />,
     estilos: { width: "300px" },
     autoCompletado: listado_opciones
 }
@@ -33,4 +38,4 @@ ACajaTextoVisualizacion.argTypes = {
     cambioTexto: { action: "cambioTexto" },
     quitoFoco: { action: "quitoFoco" },
     quitoFocus: { action: "quitoFocus" }
-};
+}

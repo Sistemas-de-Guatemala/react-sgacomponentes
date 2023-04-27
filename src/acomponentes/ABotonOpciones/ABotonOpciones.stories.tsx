@@ -1,7 +1,6 @@
 import React from 'react';
 import {
-    ComponentStory,
-    ComponentMeta
+    Meta
 } from '@storybook/react';
 
 import ABotonOpciones from '.';
@@ -9,9 +8,9 @@ import ABotonOpciones from '.';
 export default {
     title: 'react-sgacomponentes/ABotonOpciones',
     component: ABotonOpciones
-} as ComponentMeta<typeof ABotonOpciones>;
+} satisfies Meta<typeof ABotonOpciones>;
 
-const ABotonOpcionesPlantilla: ComponentStory<typeof ABotonOpciones> = (args) => <ABotonOpciones {...args} />;
+const ABotonOpcionesPlantilla = (args) => <ABotonOpciones {...args} />;
 
 export const ABotonOpcionesClick = ABotonOpcionesPlantilla.bind({});
 

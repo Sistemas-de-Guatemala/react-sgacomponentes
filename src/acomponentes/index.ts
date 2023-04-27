@@ -1,17 +1,16 @@
 import ABoton from './ABoton';
 import ABotonOpciones from './ABotonOpciones';
-import AEtiqueta from './AEtiqueta';
 import ACajaTexto from './ACajaTexto';
 import ACheckBox from './ACheckBox';
 import APaginador from './APaginador';
-import APanel from './APanel';
-import APanelLateral from './APanelLateral';
 import ARadioBotones from './ARadioBotones';
-import ATitulosPantallas from './ATitulosPantallas';
 import ATablaDinamica from './ATablaDinamica';
-import ADesplegable from './ADesplegable';
-import AFotos from './AFotos';
 import ALogoCarga from './ALogoCarga';
+import AModal from './AModal'
+import {
+    AFila,
+    ACol
+} from './AGrilla'
 import ASeccion from './ASeccion';
 import {
     APanelPestanas,
@@ -29,22 +28,19 @@ import {
 export{
     ABoton,
     ABotonOpciones,
-    AEtiqueta,
-    AFotos,
     ACajaTexto,
     ACheckBox,
+    ACol,
+    AFila,
     APaginador,
-    APanel,
-    APanelLateral,
     APanelPestana,
     APanelPestanas,
     ALogoCarga,
     ARadioBotones,
-    ATitulosPantallas,
+    AModal,
     ATabla,
     ATablaDinamica,
     ASeccion,
-    ADesplegable,
 
     /** Generar Excel desde un JSON */
     GenerarExcelJSON,

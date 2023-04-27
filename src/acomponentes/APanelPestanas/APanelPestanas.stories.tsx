@@ -1,7 +1,6 @@
 import React from 'react';
 import {
-    ComponentStory,
-    ComponentMeta,
+    Meta
 } from '@storybook/react';
 
 import {
@@ -11,10 +10,11 @@ import {
 
 export default {
     title: "react-sgacomponentes/APanelPestanas",
-    component: APanelPestanas
-} as ComponentMeta<typeof APanelPestanas>;
+    component: APanelPestanas,
+    tags: ["autodocs"]
+} satisfies Meta<typeof APanelPestanas>;
 
-const APanelPestanasPlantilla: ComponentStory<typeof APanelPestanas> = (args) => <APanelPestanas {...args} />;
+const APanelPestanasPlantilla = (args:any) => <APanelPestanas {...args} />;
 
 export const APanelPestanasVisualizacion = APanelPestanasPlantilla.bind({});
 

@@ -28,12 +28,19 @@ export interface ABotonProps {
 }
 
 export interface ABotonRef {
+    /** UUID del ACompontente */
     Refuuid: () => string;
+    /** Tipo de AComponente */
     TipoAControl: () => string;
+    /** Pone el foco en el aboton */
     focus: () => void;
+    /** Pone el foco en el aboton */
     foco: () => void;
 }
 
+/**
+ * Componente de Boton con diferentes colores y personalizable
+ */
 const ABoton = React.forwardRef<ABotonRef, ABotonProps>(
     function ABotonInterno(
         props,
@@ -51,8 +58,14 @@ const ABoton = React.forwardRef<ABotonRef, ABotonProps>(
         React.useImperativeHandle(ref, () => ({
             Refuuid: () => uuid,
             TipoAControl: (): string => "ABoton",
-            focus: (): void => refABoton.current?.focus(),
-            foco: (): void => refABoton.current?.focus()
+            focus: (): void => {
+                refABoton.current?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" })
+                refABoton.current?.focus()
+            },
+            foco: (): void => {
+                refABoton.current?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" })
+                refABoton.current?.focus()
+            }
         }));
 
 
